@@ -15,7 +15,7 @@ Module.register('MMM-TrafficCams', {
         camID: '',
         camRegion: 'SYD_MET',
         apiKey: '',
-        loadingText: "Loading...'
+        loadingText: "Loading..."
     };
 
 getScripts: function() {
