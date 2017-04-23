@@ -5,7 +5,7 @@
  * Apache Licensed.
  */
 
-Module.register('MMM-TrafficCams', {
+Module.register('MMM-TrafficCam', {
 
     defaults: {
         updateInterval: 5*60*1000,
@@ -30,7 +30,6 @@ start: function () {
     this.loaded = false;
     this.camList = {};
     this.activeItem = 0;
-    this.grabCameras();
     this.sendSocketNotification('CONFIG', this.config);
 };
 
