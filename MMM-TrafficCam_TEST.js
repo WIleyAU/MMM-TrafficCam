@@ -15,11 +15,11 @@ Module.register('MMM-TrafficCam', {
         camID: "",
         camRegion: "SYD_MET",
         apiKey: "",
-        loadingText: "Loading..."
+        loadingText: "Loading...",
+        camURL: 'http://www.rms.nsw.gov.au/trafficreports/cameras/camera_images/anzacbr.jpg'
     },
     start: function () {
         self = this;
-        this.url = 'http://www.rms.nsw.gov.au/trafficreports/cameras/camera_images/anzacbr.jpg';
         setInterval(function () {
             self.updateDom(1000);
             console.log('update')
@@ -37,7 +37,7 @@ Module.register('MMM-TrafficCam', {
         var wrapper = document.createElement("div");
         var image = document.createElement("img");
 
-        image.src = this.url;
+        image.src = this.config.camURL;
         image.className = 'MMM-TrafficCam';
 
         image.width = this.config.imageSize.toString();
