@@ -16,11 +16,11 @@ Module.register('MMM-TrafficCam', {
         camRegion: 'SYD_MET',
         apiKey: '',
         loadingText: "Loading..."
-    };
+    },
 
 getScripts: function() {
     return ["moment.js"];
-};
+},
 
 
 //Define start sequence
@@ -31,11 +31,11 @@ start: function () {
     this.camList = {};
     this.activeItem = 0;
     this.sendSocketNotification('CONFIG', this.config);
-};
+},
 
 getStyles: function() {
     return ['trafficcam.css', 'font-awesome.css'];
-};
+},
 
 
 // Override the dom generator
