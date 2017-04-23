@@ -20,11 +20,10 @@ Module.register('MMM-TrafficCam', {
 
     start: function () {
         console.log("Starting module MMM-TrafficMirror...");
-        var self = this;
         this.activeItem = 0;
-        this.CamList = {}
-        camList.cams = new array();
-        grabCams();
+        this.CamList = {};
+        this.camList.cams = new array();
+        this.grabCams();
 
         /*
         self.updateDom(1000);
@@ -41,21 +40,21 @@ Module.register('MMM-TrafficCam', {
 
     grabCams: function () {
         console.log("MMM-TrafficCam grabbing photos...");
-        camList.cams.push({
+        this.camList.cams.push({
             "camID": "d2e649",
             "camTitle": "Anzac Bridge",
             "camView": "Intersection of Victoria Road and Anzac Bridge looking east towards the Sydney CBD.",
             "camDirection": "E",
             "camURL": "http://www.rms.nsw.gov.au/trafficreports/cameras/camera_images/anzacbr.jpg"
         });
-        camList.cams.push({
+        this.camList.cams.push({
             "camID": "d2e6035",
             "camTitle": "York Street (Sydney)",
             "camView": "York Street at Margaret Street looking north towards Sydney Harbour Bridge.",
             "camDirection": "N",
             "camURL": "http://www.rms.nsw.gov.au/trafficreports/cameras/camera_images/yorkst_sydney.jpg"
         });
-        camList.cams.push({
+        this.camList.cams.push({
             "camID": "d2e38",
             "camTitle": "Sydney Harbour Bridge",
             "camView": "Sydney Harbour Bridge deck looking south towards the Sydney CBD.",
@@ -73,12 +72,12 @@ Module.register('MMM-TrafficCam', {
         //var self = this;
 
         console.log("MMM-TrafficCam Scheduled update interval set up...");
-        self.updateDom();
+        this.updateDom();
 
         setInterval(function () {
             console.log("MMM-TrafficCam incrementing the activeItem and refreshing");
-            self.activeItem++;
-            self.updateDom();
+            this.activeItem++;
+            this.updateDom();
         }, 5000);
     },
 
@@ -93,6 +92,7 @@ Module.register('MMM-TrafficCam', {
         }
 
         var tempimage = this.camList.cams[this.activeItem].camURL;
+        console.log("MMM-TrafficCam URL: " + tempiamge);
 
         image.src = tempimage;
         image.className = 'MMM-TrafficCam';
