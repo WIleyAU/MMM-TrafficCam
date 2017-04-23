@@ -9,7 +9,8 @@ const NodeHelper = require('node_helper');
 var async = require('async');
 var https = require('https');
 const request = require('request');
-
+var camList = {};
+camList.cams = new Array ();
 
 module.exports = NodeHelper.create({
 
@@ -84,8 +85,7 @@ module.exports = NodeHelper.create({
 
         req.end();
         */
-        var camList = {};
-        camList.cams = new Array ();
+        
         camList.cams.push({
             "camID": "d2e649",
             "camTItle": "Anzac Bridge",
