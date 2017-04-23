@@ -32,7 +32,7 @@ start: function () {
     this.activeItem = 0;
     this.camURL = "http://www.rms.nsw.gov.au/trafficreports/cameras/camera_images/anzacbr.jpg";
     //this.sendSocketNotification('CONFIG', this.config);
-    this.socketNotificationReceived("CAMERA_IMAGE_LIST", this.camURL);
+    this.testNotificationReceived("CAMERA_IMAGE_LIST", this.camURL);
 },
 
 getStyles: function() {
@@ -89,7 +89,7 @@ scheduleUpdateInterval: function() {
 
 
 // override socketNotificationReceived
-socketNotificationReceived: function(notification, payload) {
+testNotificationReceived: function(notification, payload) {
     //Log.info('socketNotificationReceived: ' + notification);
     if (notification === 'CAMERA_IMAGE_LIST')
     {
