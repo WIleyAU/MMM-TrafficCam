@@ -108,5 +108,6 @@ module.exports = NodeHelper.create({
             "camURL": "http://www.rms.nsw.gov.au/trafficreports/cameras/camera_images/yorkst_sydney.jpg"
         });
         self.sendSocketNotification('CAMERA_IMAGE_LIST', camList);
+        console.log("CamList",camList);
     }
 });
