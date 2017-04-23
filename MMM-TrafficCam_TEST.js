@@ -61,6 +61,10 @@ Module.register('MMM-TrafficCam', {
             "camDirection": "S",
             "camURL": "http://www.rms.nsw.gov.au/trafficreports/cameras/camera_images/harbourbridge.jpg"
         });
+        this.displayCams();
+    },
+
+    displayCams: function() {
         this.updateDom();
         this.scheduleUpdateInterval();
     },
