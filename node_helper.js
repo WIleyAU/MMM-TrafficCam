@@ -9,8 +9,7 @@ const NodeHelper = require('node_helper');
 var async = require('async');
 var https = require('https');
 const request = require('request');
-var camList = {};
-camList.cams = new Array ();
+
 
 module.exports = NodeHelper.create({
 
@@ -35,7 +34,8 @@ module.exports = NodeHelper.create({
     retrieveAndUpdate: function() {
         var self = this;
         console.log('retrieveAndUpdate()');
-
+        var camList = {};
+        camList.cams = new Array ();
         
         /* commenting out for testing purposes
         //set https options
