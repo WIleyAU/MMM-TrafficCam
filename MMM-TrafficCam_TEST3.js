@@ -4,7 +4,7 @@
  * By Scott Kemble
  * Apache 2.0 Licensed.
  */
-
+//comment
 var NodeHelper = require('node_helper');
 var request = require('request');
 
