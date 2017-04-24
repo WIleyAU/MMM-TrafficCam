@@ -25,62 +25,13 @@ Module.register('MMM-TrafficCam', {
         self = this;
         this.url = '';
         this.imageList = [];
+        this.tempList = [];
         this.activeItem = 0;
         this.grabCams();
     },
 
 
-    //TESTING
-    /*
-    grabCams: function() {
-        var tempList = [];
-        var tempObject = {};
-        var tempObject2 = {};
-        tempObject = {
-            "type": "Feature",
-            "id": "d2e6035",
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    151.205623,
-                    -33.865088
-                ]
-            },
-            "properties": {
-                "region": "SYD_MET",
-                "title": "York Street (Sydney)",
-                "view": "York Street at Margaret Street looking north towards Sydney Harbour Bridge.",
-                "direction": "N",
-                "href": "http://www.rms.nsw.gov.au/trafficreports/cameras/camera_images/yorkst_sydney.jpg"
-            }
-        };
-        tempList.push(tempObject);
-        tempObject2 = {
-            "type": "Feature",
-            "id": "d2e6036",
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                        151.265661,
-                    -33.788582
-                ]
-            },
-            "properties": {
-                "region": "SYD_NORTH",
-                "title": "Burnt Bridge Creek (Balgowlah)",
-                "view": "Burnt Bridge Creek at Condamine Street looking north towards Dee Why.",
-                "direction": "N",
-                "href": "http://www.rms.nsw.gov.au/trafficreports/cameras/camera_images/burntbrdg_seaforth.jpg"
-            }
-        };
-        tempList.push(tempObject2);
-
-        this.imageList = tempList;
-        this.scheduleUpdate();
-    },
-    */
-
-    
+     
     grabCams: function () {
         var options = {
             "apiKey": this.config.apiKey,
@@ -89,12 +40,12 @@ Module.register('MMM-TrafficCam', {
         this.sendSocketNotification("TRAFFIC_CAM_GET",options);
     },
 
-    filterImages: function(items) {
-        items.forEach(function (results) {
+    filterImages: function() {
+        this.tempList.forEach(function (results) {
             console.log("MMM-TrafficCam forEach start check...");
             console.log("MMM-TrafficCam results.properties.region: " + results.properties.region);
-            if (results.properties.region == this.camRegion) {
-                console.log("MMM-TrafficCam this.config.camRegion: " + this.camRegion);
+            if (results.properties.region == this.config.camRegion) {
+                console.log("MMM-TrafficCam this.config.camRegion: " + this.config.camRegion);
                 this.imageList.push(results);
                 console.log("MMM-TrafficCam images length working: " + this.imageList.length);
             };
@@ -107,7 +58,8 @@ Module.register('MMM-TrafficCam', {
         if (notification === "TRAFFIC_CAM_LIST") {
             console.log("MMM-TrafficCam Payload RECEIVED");
             console.log("MMM-TrafficCam Payload Length: " + payload.length);
-            this.filterImages(payload);
+            this.tempList = payload;
+            this.filterImages();
         }
     },
     
