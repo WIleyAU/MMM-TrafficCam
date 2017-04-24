@@ -85,8 +85,7 @@ module.exports = NodeHelper.create({
             }
         };
 
-        //Get image URLs
-        request(options, function (error, response, body) {
+        callback: function(error, response, body) {
             if (!error && response.statusCode == 200) {
                 // get our images out of the INSTAGRAM JSON response
                 var items = JSON.parse(body);
@@ -95,8 +94,8 @@ module.exports = NodeHelper.create({
                 var images = [];
 
                 items.features.forEach(function (results) {
-                    if (results.properties.region === this.config.camRegion) {
-                        images.push(result);
+                    if (results.properties.region == this.config.camRegion) {
+                        images.push(results);
                     };
                     
                 };
@@ -106,7 +105,10 @@ module.exports = NodeHelper.create({
             else {
                 console.log(" Error: " + response.statusCode);
             }
-        });
+        };
+
+        //Get image URLs
+        request(options, callback);
 
     }
 
