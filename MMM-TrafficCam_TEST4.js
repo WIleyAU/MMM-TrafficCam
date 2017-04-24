@@ -20,7 +20,10 @@ module.exports = NodeHelper.create({
     // Subclass socketNotificationReceived received.
     socketNotificationReceived: function(notification, apiKey) {
         if (notification === 'TRAFFIC_CAM_GET') {
+            console.log("MMM-TrafficCam Notification Received: ", notification);
+            console.log("MMM-TrafficCam apiKey: " + apiKey);
             this.apiKey = apiKey;
+            console.log("MMM-TrafficCam this.apiKey: " + this.apiKey);
             this.testGrab();
         }
     },
@@ -75,7 +78,7 @@ module.exports = NodeHelper.create({
     
     testGrab: function () {
         var self = this;
-        console.log('retrieveAndUpdate()');
+        console.log('MMM-TrafficCam: testGrab()');
 
         //set https options
         var options = {
@@ -87,20 +90,27 @@ module.exports = NodeHelper.create({
             }
         };
 
+        console.log("MMM-TrafficCam options: " + options);
+
         request(options, function (error, response, body) {
             if (!error && response.statusCode == 200) {
+                console.log("MMM-TrafficCam statusCode: " + response.statusCode);
                 // get our images out of the INSTAGRAM JSON response
                 var items = JSON.parse(body);
-
+                console.log("MMM-TrafficCam items: " + items);
                 // create our model, a dictionary with 
                 var images = [];
 
                 items.features.forEach(function (results) {
                     if (results.properties.region == this.config.camRegion) {
+                        console.log("MMM-TrafficCam this.config.camRegion: " + this.config.camRegion);
                         images.push(results);
+                        console.log("MMM-TrafficCam images working: " + images);
                     };
 
                 });
+                console.log("MMM-TrafficCam images final: " + images);
+                console.log("MMM-TrafficCam: Sending Socket Notification");
                 self.sendSocketNotification('TRAFFIC_CAM_LIST', images);
                 //console.log(images)
 
