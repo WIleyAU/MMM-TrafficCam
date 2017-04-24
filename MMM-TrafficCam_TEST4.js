@@ -104,16 +104,16 @@ module.exports = NodeHelper.create({
                 console.log("MMM-TrafficCam items: " + items);
                 // create our model, a dictionary with 
                 var images = [];
-
+                console.log("MMM-TrafficCam new image array length: " + images.length);
                 items.features.forEach(function (results) {
                     if (results.properties.region == this.camRegion) {
-                        console.log("MMM-TrafficCam this.config.camRegion: " + this.config.camRegion);
+                        console.log("MMM-TrafficCam this.config.camRegion: " + this.camRegion);
                         images.push(results);
-                        console.log("MMM-TrafficCam images working: " + images);
+                        console.log("MMM-TrafficCam images length working: " + images.length);
                     };
 
                 });
-                console.log("MMM-TrafficCam images final: " + images);
+                console.log("MMM-TrafficCam images length final: " + images.length);
                 console.log("MMM-TrafficCam: Sending Socket Notification");
                 self.sendSocketNotification('TRAFFIC_CAM_LIST', images);
                 //console.log(images)
