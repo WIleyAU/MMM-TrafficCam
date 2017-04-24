@@ -31,6 +31,7 @@ Module.register('MMM-TrafficCam', {
 
 
     //TESTING
+    /*
     grabCams: function() {
         var tempList = [];
         var tempObject = {};
@@ -77,8 +78,9 @@ Module.register('MMM-TrafficCam', {
         this.imageList = tempList;
         this.scheduleUpdate();
     },
+    */
 
-    /*
+    
     grabCams: function () {
         this.sendSocketNotification("TRAFFIC_CAM_GET");
     },
@@ -91,7 +93,7 @@ Module.register('MMM-TrafficCam', {
             this.scheduleUpdate();
         }
     },
-    */
+    
 
 
 
