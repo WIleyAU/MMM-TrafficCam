@@ -8,6 +8,7 @@
 var NodeHelper = require('node_helper');
 var request = require('request');
 var apiKey = "";
+var camRegion = "";
 
 
 module.exports = NodeHelper.create({
@@ -18,12 +19,15 @@ module.exports = NodeHelper.create({
     },
 
     // Subclass socketNotificationReceived received.
-    socketNotificationReceived: function(notification, apiKey) {
+    socketNotificationReceived: function(notification, apiKey, camRegion) {
         if (notification === 'TRAFFIC_CAM_GET') {
             console.log("MMM-TrafficCam Notification Received: ", notification);
             console.log("MMM-TrafficCam apiKey: " + apiKey);
             this.apiKey = apiKey;
             console.log("MMM-TrafficCam this.apiKey: " + this.apiKey);
+            console.log("MMM-TrafficCam camRegion: " + camRegion);
+            this.camRegion = camRegion;
+            console.log("MMM-TrafficCam this.camRegion: " + this.camRegion);
             this.testGrab();
         }
     },
@@ -90,7 +94,7 @@ module.exports = NodeHelper.create({
             }
         };
 
-        console.log("MMM-TrafficCam options: " + options);
+        console.log("MMM-TrafficCam url: " + options["url"]);
 
         request(options, function (error, response, body) {
             if (!error && response.statusCode == 200) {
@@ -102,7 +106,7 @@ module.exports = NodeHelper.create({
                 var images = [];
 
                 items.features.forEach(function (results) {
-                    if (results.properties.region == this.config.camRegion) {
+                    if (results.properties.region == this.camRegion) {
                         console.log("MMM-TrafficCam this.config.camRegion: " + this.config.camRegion);
                         images.push(results);
                         console.log("MMM-TrafficCam images working: " + images);
