@@ -27,8 +27,8 @@ module.exports = NodeHelper.create({
         var self = this;
 
         var options = {
-            hostname: "api.transport.nsw.gov.au",
-            port: 443,
+            hostname: "https://api.transport.nsw.gov.au",
+            //port: 443,
             path: "/v1/live/cameras",
             method: "GET",
             headers: {
