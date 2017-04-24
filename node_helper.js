@@ -27,17 +27,17 @@ module.exports = NodeHelper.create({
         var self = this;
 
         var options = {
-            hostname: "https://api.transport.nsw.gov.au",
+            url: "https://api.transport.nsw.gov.au/v1/live/cameras",
             //port: 443,
-            path: "/v1/live/cameras",
-            method: "GET",
+            //path: "/v1/live/cameras",
+           // method: "GET",
             headers: {
                 "Accept": "application/json",
                 "Authorization": "apikey " + this.config.apiKey
             }
         };
 
-        request(options, function(error, response, body)
+        request.get(options, function(error, response, body)
         {
             if (!error && response.statusCode == 200)
             {
