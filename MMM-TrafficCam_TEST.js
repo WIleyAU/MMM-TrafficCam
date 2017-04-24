@@ -25,6 +25,7 @@ Module.register('MMM-TrafficCam', {
         self = this;
         this.url = '';
         this.imageList = [];
+        this.activeItem = 0;
         this.imageUrls = {
             'natColor': 'http://www.rms.nsw.gov.au/trafficreports/cameras/camera_images/anzacbr.jpg',
             'geoColor': 'http://rammb.cira.colostate.edu/ramsdis/online/images/latest/himawari-8/full_disk_ahi_true_color.jpg',
@@ -53,7 +54,7 @@ Module.register('MMM-TrafficCam', {
             if (this.config.imageSize > 800) {
                 this.url = this.hiResImageUrls[this.config.style];
             } else {
-                this.url = this.imageUrls[this.config.style];
+                this.url = this.imageList.imageUrls[this.config.style];
             }
             setInterval(function () {
                 self.updateDom(1000);
