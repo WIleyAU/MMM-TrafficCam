@@ -27,9 +27,9 @@ module.exports = NodeHelper.create({
         var self = this;
 
         var options = {
-            hostname: "api.transport.nsw.gov.au",
-            port: 443,
-            path: "/v1/live/cameras",
+            url: "https://api.transport.nsw.gov.au/v1/live/cameras",
+            //port: 443,
+            //path: "/v1/live/cameras",
             method: "GET",
             headers: {
                 "Accept": "application/json",
@@ -46,7 +46,7 @@ module.exports = NodeHelper.create({
                 var camList = [];
 
                 items.features.forEach(function (result) {
-                    if (result.properties.region == this.camRegion) {
+                    if (result.properties.region == this.config.camRegion) {
                         camList.push(items.features);
                     }
                 });

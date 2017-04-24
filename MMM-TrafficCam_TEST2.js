@@ -66,7 +66,7 @@ Module.register('MMM-TrafficCam', {
         if (this.activeItem >= this.imageList.length) {
             this.activeItem = 0;
         }
-        this.url = this.imageList[this.activeItem][this.config.style];
+        this.url = this.imageList[this.activeItem][properties.href];
         this.activeItem++;
 
     
