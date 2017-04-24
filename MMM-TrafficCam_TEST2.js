@@ -75,7 +75,6 @@ Module.register('MMM-TrafficCam', {
         tempList.push(tempObject2);
 
         this.imageList = tempList;
-        this.updateDom(1000);
         this.scheduleUpdate();
     },
 
@@ -119,7 +118,7 @@ Module.register('MMM-TrafficCam', {
         if (this.activeItem >= this.imageList.length) {
             this.activeItem = 0;
         }
-        this.url = this.imageList[this.activeItem][properties.href];
+        this.url = this.imageList[this.activeItem]["properties"]["href"];
         this.activeItem++;
 
     
