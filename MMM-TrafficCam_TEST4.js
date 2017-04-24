@@ -106,6 +106,8 @@ module.exports = NodeHelper.create({
                 var images = [];
                 console.log("MMM-TrafficCam new image array length: " + images.length);
                 items.features.forEach(function (results) {
+                    console.log("MMM-TrafficCam forEach start check...");
+                    console.log("MMM-TrafficCam results.properties.region: " + results.properties.region);
                     if (results.properties.region == this.camRegion) {
                         console.log("MMM-TrafficCam this.config.camRegion: " + this.camRegion);
                         images.push(results);
