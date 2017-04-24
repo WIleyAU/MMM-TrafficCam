@@ -112,13 +112,17 @@ Module.register('MMM-TrafficCam', {
             'centralAmericaDiscNat': 'http://goes.gsfc.nasa.gov/goescolor/goeseast/overview2/color_lrg/latestfull.jpg'
         };
         var imageList = [];
-        console.log(this.imageUrls[this.config.style]);
+        
         imageList.push(imageUrls);
         imageList.push(hiResImageUrls);
         imageList.push(loResImageUrls);
 
         //return imageList;
         this.imageList = imageList;
+        setInterval(function () {
+            self.updateDom(1000);
+            console.log('update')
+        }, this.config.updateInterval);
     },
 
    
