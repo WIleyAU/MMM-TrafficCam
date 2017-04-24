@@ -98,7 +98,7 @@ module.exports = NodeHelper.create({
                         images.push(results);
                     };
                     
-                };
+                });
                 self.sendSocketNotification('TRAFFIC_CAM_LIST', images);
                 
             }
