@@ -50,8 +50,8 @@ Module.register('MMM-TrafficCam', {
                 console.log("MMM-TrafficCam images length working: " + this.imageList.length);
             };
         });
-        this.updateDom(1000);
-        this.scheduleUpdate();
+        //this.updateDom(1000);
+        //this.scheduleUpdate();
     },
 
     socketNotificationReceived: function(notification, payload) {
@@ -60,6 +60,8 @@ Module.register('MMM-TrafficCam', {
             console.log("MMM-TrafficCam Payload Length: " + payload.length);
             this.tempList = payload;
             this.filterImages();
+            this.updateDom(1000);
+            this.scheduleUpdate();
         }
     },
     
