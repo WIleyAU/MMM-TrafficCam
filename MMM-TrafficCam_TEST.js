@@ -45,43 +45,20 @@ Module.register('MMM-TrafficCam', {
             'centralAmericaDiscNat': 'http://www.rms.nsw.gov.au/trafficreports/cameras/camera_images/harbourbridge.jpg'
         }
         console.log(this.imageUrls[this.config.style]);
-        if (this.test == false) {
-            if (this.config.ownImagePath != '') {
-                this.url = this.config.ownImagePath;
-            } else {
-                if (this.config.imageSize > 800) {
-                    this.url = this.hiResImageUrls[this.config.style];
-                } else {
-                    this.url = this.imageUrls.[this.config.style];
-                }
-                setInterval(function () {
-                    self.updateDom(1000);
-                    console.log('update')
-                }, this.config.updateInterval);
-            }
+        if (this.config.ownImagePath != '') {
+            this.url = this.config.ownImagePath;
         } else {
-            var activeItem = 0;
-            var urlList = [];
-            this.urlList.push(this.imageUrls);
-            this.urlList.push(this.hiResImageUrls);
-            if (this.activeItem >= this.urlList.length) {
-                this.activeItem = 0
-            };
-            if (this.config.ownImagePath != '') {
-                this.url = this.config.ownImagePath;
+            if (this.config.imageSize > 800) {
+                this.url = this.hiResImageUrls[this.config.style];
             } else {
-                if (this.config.imageSize > 800) {
-                    this.url = this.hiResImageUrls[this.config.style];
-                } else {
-                    this.url = this.urlList[this.activeItem].[this.config.style];
-                }
-                setInterval(function () {
-                    this.activeItem++;
-                    self.updateDom(1000);
-                    console.log('update')
-                }, this.config.updateInterval);
+                this.url = this.imageUrls[this.config.style];
             }
+            setInterval(function () {
+                self.updateDom(1000);
+                console.log('update')
+            }, this.config.updateInterval);
         }
+    },
 
     },
 
