@@ -51,7 +51,8 @@ module.exports = NodeHelper.create({
         };
 
         console.log("MMM-TrafficCam url: " + options["url"]);
-
+        var reqRegion = this.camRegion;
+        console.log("MMM-TrafficCam REQUEST reqRegion: " + reqRegion);
         request(options, function (error, response, body) {
             if (!error && response.statusCode == 200) {
                 console.log("MMM-TrafficCam statusCode: " + response.statusCode);
@@ -88,11 +89,9 @@ module.exports = NodeHelper.create({
             else {
                 console.log(" Error: " + response.statusCode);
             }
-        }.bind({camRegion:this.camRegion}));
+        }.bind({camRegion:reqRegion}));
     }
     
 });
 
 
-Contact GitHub API Training Shop Blog About
-© 2017 GitHub, Inc. Terms Privacy Security Status Help
