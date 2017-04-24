@@ -54,12 +54,12 @@ Module.register('MMM-TrafficCam', {
             if (this.config.imageSize > 800) {
                 this.url = this.hiResImageUrls[this.config.style];
             } else {
-                if (this.activeItem >= imageList.length) {
-                    this.activeItem = 0}
+               // if (this.activeItem >= imageList.length) {
+                 //   this.activeItem = 0}
                 this.url = this.imageList[this.activeItem][this.config.style];
             }
             setInterval(function () {
-                this.activeItem++;
+                //this.activeItem++;
                 self.updateDom(1000);
                 console.log('update')
             }, this.config.updateInterval);
