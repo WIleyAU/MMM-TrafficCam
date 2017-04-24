@@ -8,7 +8,7 @@
 Module.register('MMM-TrafficCam', {
 
     defaults: {
-        updateInterval: 3*60*1000,
+        updateInterval: 1*60*1000,
         animationSpeed: 0,
         header: '',
         imageSize: 400,
@@ -16,99 +16,73 @@ Module.register('MMM-TrafficCam', {
         camRegion: "SYD_MET",
         apiKey: "",
         loadingText: "Loading...",
+        style: 'geoColor',
+        ownImagePath: ''
     },
 
-    start: function () {
-        console.log("Starting module MMM-TrafficMirror...");
-        this.activeItem = 0;
-        this.CamList = {};
-        this.camList.cams = new array();
-        this.grabCams();
 
-        /*
-        self.updateDom(1000);
-        setInterval(function () {
-            self.updateDom(1000);
-        }, 90000);
-        */
-       
+    start: function () {
+        self = this;
+        this.url = '';
+        this.imageUrls = {
+            'natColor': 'http://www.rms.nsw.gov.au/trafficreports/cameras/camera_images/anzacbr.jpg',
+            'geoColor': 'http://rammb.cira.colostate.edu/ramsdis/online/images/latest/himawari-8/full_disk_ahi_true_color.jpg',
+            'airMass': 'http://rammb.cira.colostate.edu/ramsdis/online/images/latest/himawari-8/full_disk_ahi_rgb_airmass.jpg',
+            'fullBand': 'http://rammb.cira.colostate.edu/ramsdis/online/images/latest/himawari-8/himawari-8_band_03_sector_02.gif',
+            'europeDiscNat': 'http://www.rms.nsw.gov.au/trafficreports/cameras/camera_images/yorkst_sydney.jpg',
+            'europeDiscSnow': 'http://oiswww.eumetsat.org/IPPS/html/latestImages/EUMETSAT_MSG_RGBSolarDay_CentralEurope.jpg',
+            'centralAmericaDiscNat': 'http://www.rms.nsw.gov.au/trafficreports/cameras/camera_images/harbourbridge.jpg'
+
+        }
+        this.hiResImageUrls = {
+            'natColor': 'http://www.rms.nsw.gov.au/trafficreports/cameras/camera_images/anzacbr.jpg',
+            'geoColor': 'http://rammb.cira.colostate.edu/ramsdis/online/images/latest_hi_res/himawari-8/full_disk_ahi_true_color.jpg',
+            'airMass': 'http://rammb.cira.colostate.edu/ramsdis/online/images/latest_hi_res/himawari-8/full_disk_ahi_rgb_airmass.jpg',
+            'fullBand': 'http://rammb.cira.colostate.edu/ramsdis/online/images/latest/himawari-8/himawari-8_band_03_sector_02.gif',
+            'europeDiscNat': 'http://www.rms.nsw.gov.au/trafficreports/cameras/camera_images/yorkst_sydney.jpg',
+            'europePartSnow': 'http://oiswww.eumetsat.org/IPPS/html/latestImages/EUMETSAT_MSG_RGBSolarDay_CentralEurope.jpg',
+            'centralAmericaDiscNat': 'http://www.rms.nsw.gov.au/trafficreports/cameras/camera_images/harbourbridge.jpg'
+        }
+        console.log(this.imageUrls[this.config.style]);
+        if (this.config.ownImagePath != '') {
+            this.url = this.config.ownImagePath;
+        } else {
+            if (this.config.imageSize > 800) {
+                this.url = this.hiResImageUrls[this.config.style];
+            } else {
+                this.url = this.imageUrls[this.config.style];
+            }
+            setInterval(function () {
+                self.updateDom(1000);
+                console.log('update')
+            }, this.config.updateInterval);
+        }
     },
 
     getStyles: function () {
         return ["trafficcams.css"]
     },
 
-    grabCams: function () {
-        console.log("MMM-TrafficCam grabbing photos...");
-        /*
-        this.camList.cams.push({
-            "camID": "d2e649",
-            "camTitle": "Anzac Bridge",
-            "camView": "Intersection of Victoria Road and Anzac Bridge looking east towards the Sydney CBD.",
-            "camDirection": "E",
-            "camURL": "http://www.rms.nsw.gov.au/trafficreports/cameras/camera_images/anzacbr.jpg"
-        });
-        this.camList.cams.push({
-            "camID": "d2e6035",
-            "camTitle": "York Street (Sydney)",
-            "camView": "York Street at Margaret Street looking north towards Sydney Harbour Bridge.",
-            "camDirection": "N",
-            "camURL": "http://www.rms.nsw.gov.au/trafficreports/cameras/camera_images/yorkst_sydney.jpg"
-        });
-        this.camList.cams.push({
-            "camID": "d2e38",
-            "camTitle": "Sydney Harbour Bridge",
-            "camView": "Sydney Harbour Bridge deck looking south towards the Sydney CBD.",
-            "camDirection": "S",
-            "camURL": "http://www.rms.nsw.gov.au/trafficreports/cameras/camera_images/harbourbridge.jpg"
-        });
-        */
-        this.CamList.cams = {
-            "camID": "d2e649",
-            "camTitle": "Anzac Bridge",
-            "camView": "Intersection of Victoria Road and Anzac Bridge looking east towards the Sydney CBD.",
-            "camDirection": "E",
-            "camURL": "http://www.rms.nsw.gov.au/trafficreports/cameras/camera_images/anzacbr.jpg"
-        };
-        this.displayCams();
-    },
-
-    displayCams: function() {
-        this.updateDom();
-        this.scheduleUpdateInterval();
-    },
-
-    /* scheduleUpdateInterval()
-     * Schedule visual update.
-     */
-    scheduleUpdateInterval: function () {
-        //var self = this;
-
-        console.log("MMM-TrafficCam Scheduled update interval set up...");
-        this.updateDom();
-
-        setInterval(function () {
-            console.log("MMM-TrafficCam incrementing the activeItem and refreshing");
-            this.activeItem++;
-            this.updateDom();
-        }, 5000);
-    },
-
     // Override dom generator.
 
     getDom: function () {
         var wrapper = document.createElement("div");
-        var image = document.createElement("img");
-
-        if (this.activeItem >= this.camList.cams.length) {
-            this.activeItem = 0;
+        if (this.config.style == "europeDiscNat") {
+            wrapper.style.height = 0.98 * this.config.imageSize - 1 + "px";
+            wrapper.style.overflow = "hidden";
         }
 
-        var tempimage = this.camList.cams[this.activeItem].camURL;
-        console.log("MMM-TrafficCam URL: " + tempiamge);
 
-        image.src = tempimage;
-        image.className = 'MMM-TrafficCam';
+        var image = document.createElement("img");
+        if (this.config.ownImagePath != '') {
+            image.src = this.url;
+        } else if (this.config.style == "centralAmericaDiscNat"){
+            image.src = this.url + '?' + new Date().getTime();
+            image.className = 'MMM-Globe-image-centralAmericaDiscNat';
+        } else {
+            image.src = this.url + '?' + new Date().getTime();
+            image.className = 'MMM-Globe-image';
+        }
 
         image.width = this.config.imageSize.toString();
         image.height = this.config.imageSize.toString();
@@ -116,7 +90,4 @@ Module.register('MMM-TrafficCam', {
         wrapper.appendChild(image);
         return wrapper;
     }
-
-   
-
 });
