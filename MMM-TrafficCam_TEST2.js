@@ -82,7 +82,11 @@ Module.register('MMM-TrafficCam', {
 
     
     grabCams: function () {
-        this.sendSocketNotification("TRAFFIC_CAM_GET",this.config.apiKey, this.config.camRegion);
+        var options = {
+            "apiKey": this.config.apiKey,
+            "camRegion": this.config.camRegion
+        };
+        this.sendSocketNotification("TRAFFIC_CAM_GET",options);
     },
 
 
