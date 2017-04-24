@@ -60,11 +60,8 @@ Module.register('MMM-TrafficCam', {
 
     getDom: function () {
         var wrapper = document.createElement("div");
-        if (this.config.style == "europeDiscNat") {
-            wrapper.style.height = 0.98 * this.config.imageSize - 1 + "px";
-            wrapper.style.overflow = "hidden";
-        }
-
+        var header = document.createElement("header");
+        var name = document.createElement("span");
 
         if (this.activeItem >= this.imageList.length) {
             this.activeItem = 0;
@@ -72,21 +69,19 @@ Module.register('MMM-TrafficCam', {
         this.url = this.imageList[this.activeItem][this.config.style];
         this.activeItem++;
 
+    
         var image = document.createElement("img");
-        if (this.config.ownImagePath != '') {
-            image.src = this.url;
-        } else if (this.config.style == "centralAmericaDiscNat") {
-            image.src = this.url + '?' + new Date().getTime();
-            image.className = 'MMM-Globe-image-centralAmericaDiscNat';
-        } else {
-            image.src = this.url + '?' + new Date().getTime();
-            image.className = 'MMM-Globe-image';
-        }
-
+        image.src = this.url;
+        image.className = 'MMM-TrafficCam';
         image.width = this.config.imageSize.toString();
         image.height = this.config.imageSize.toString();
 
+        name.innerHTML = "" + this.url;
+
+        header.appendChild(name);
         wrapper.appendChild(image);
+        wrapper.appendChild(header);
+
         return wrapper;
     }
 });
