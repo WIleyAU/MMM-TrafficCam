@@ -89,12 +89,23 @@ Module.register('MMM-TrafficCam', {
         this.sendSocketNotification("TRAFFIC_CAM_GET",options);
     },
 
+    filterImages: function(items) {
+        items.features.forEach(function (results) {
+            console.log("MMM-TrafficCam forEach start check...");
+            console.log("MMM-TrafficCam results.properties.region: " + results.properties.region);
+            if (results.properties.region == this.camRegion) {
+                console.log("MMM-TrafficCam this.config.camRegion: " + this.camRegion);
+                this.imageList.push(results);
+                console.log("MMM-TrafficCam images length working: " + this.imageList.length);
+            };
+        });
+        this.updateDom(1000);
+        this.scheduleUpdate();
+    },
 
     socketNotificationReceived: function(notification, payload) {
         if (notification === "TRAFFIC_CAM_LIST") {
-            this.imageList = payload;
-            this.updateDom(1000);
-            this.scheduleUpdate();
+            filterImages(payload);
         }
     },
     

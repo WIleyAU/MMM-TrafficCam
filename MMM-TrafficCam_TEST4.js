@@ -10,6 +10,7 @@ var request = require('request');
 var apiKey = "";
 var camRegion = "";
 var callTest = "";
+var imagesWorking = {};
 
 
 module.exports = NodeHelper.create({
@@ -30,10 +31,15 @@ module.exports = NodeHelper.create({
             this.camRegion = options["camRegion"];
             console.log("MMM-TrafficCam this.camRegion: " + this.camRegion);
             this.testGrab();
+        } else {
+            this.filterImages();
         }
     },
 
-  
+    filterImages: function() {
+
+
+    },
 
     
     testGrab: function () {
@@ -64,7 +70,8 @@ module.exports = NodeHelper.create({
                 var tempRegion = "";
                 console.log("MMM-TrafficCams IN REQUEST camRegion: " + this.camRegion);
                 console.log("MMM-TrafficCam items: " + items);
-                // create our model, a dictionary with 
+                // create our model, a dictionary with
+
                 var images = [];
                 console.log("MMM-TrafficCam new image array length: " + images.length);
                 items.features.forEach(function (results) {
@@ -82,7 +89,7 @@ module.exports = NodeHelper.create({
                 });
                 console.log("MMM-TrafficCam images length final: " + images.length);
                 console.log("MMM-TrafficCam: Sending Socket Notification");
-                self.sendSocketNotification('TRAFFIC_CAM_LIST', images);
+                self.sendSocketNotification('TRAFFIC_CAM_LIST', items);
                 //console.log(images)
 
             }
