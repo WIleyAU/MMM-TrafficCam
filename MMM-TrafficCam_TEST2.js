@@ -33,25 +33,27 @@ Module.register('MMM-TrafficCam', {
     //TESTING
     grabCams: function() {
         var tempList = [];
-        tempList.push({
-                    "type": "Feature",
-                    "id": "d2e6035",
-                    "geometry": {
-                        "type": "Point",
-                        "coordinates": [
-                            151.205623,
-                            -33.865088
-                            ]
-                    },
-                    "properties": {
-                        "region": "SYD_MET",
-                        "title": "York Street (Sydney)",
-                        "view": "York Street at Margaret Street looking north towards Sydney Harbour Bridge.",
-                        "direction": "N",
-                        "href": "http://www.rms.nsw.gov.au/trafficreports/cameras/camera_images/yorkst_sydney.jpg"
-                     }
-},
-        {
+        var tempObject = {};
+        tempObject = {
+            "type": "Feature",
+            "id": "d2e6035",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    151.205623,
+                    -33.865088
+                ]
+            },
+            "properties": {
+                "region": "SYD_MET",
+                "title": "York Street (Sydney)",
+                "view": "York Street at Margaret Street looking north towards Sydney Harbour Bridge.",
+                "direction": "N",
+                "href": "http://www.rms.nsw.gov.au/trafficreports/cameras/camera_images/yorkst_sydney.jpg"
+            }
+        };
+        tempList.push(tempObject);
+        tempObject = {
             "type": "Feature",
             "id": "d2e6036",
             "geometry": {
@@ -67,11 +69,12 @@ Module.register('MMM-TrafficCam', {
                 "view": "Burnt Bridge Creek at Condamine Street looking north towards Dee Why.",
                 "direction": "N",
                 "href": "http://www.rms.nsw.gov.au/trafficreports/cameras/camera_images/burntbrdg_seaforth.jpg"
-}
-        });
+            }
+        };
+        tempList.push(tempObject);
 
-        this.imageList = tempList
-        this.updateDome(1000),
+        this.imageList = tempList;
+        this.updateDome(1000);
         this.scheduleUpdate;
     },
 
