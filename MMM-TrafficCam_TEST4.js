@@ -96,12 +96,19 @@ module.exports = NodeHelper.create({
 
         console.log("MMM-TrafficCam url: " + options["url"]);
 
+        getRegion: function() {
+            console.log("MMM-TrafficCam getRegion: " + this.camRegion);
+            return this.camRegion
+        };
+
         request(options, function (error, response, body) {
             if (!error && response.statusCode == 200) {
                 console.log("MMM-TrafficCam statusCode: " + response.statusCode);
                 // get our images out of the INSTAGRAM JSON response
                 var items = JSON.parse(body);
                 var tempRegion = "";
+                var camRegion = getRegion();
+                console.log("MMM-TrafficCams IN REQUEST camRegion: " + camRegion);
                 console.log("MMM-TrafficCam items: " + items);
                 // create our model, a dictionary with 
                 var images = [];
@@ -111,6 +118,7 @@ module.exports = NodeHelper.create({
                     console.log("MMM-TrafficCam results.properties.region: " + results.properties.region);
                     tempRegion = results.properties.region;
                     console.log("MMM-TrafficCam tempRegion: " + tempRegion);
+                    console.log("MMM-TrafficCam IN REQUEST tempRegion(" + tempRegion + ") = camRegion(" + camRegion + ")");
                     if (tempRegion == this.camRegion) {
                         console.log("MMM-TrafficCam this.config.camRegion: " + this.camRegion);
                         images.push(results);
