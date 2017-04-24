@@ -9,6 +9,7 @@ var NodeHelper = require('node_helper');
 var request = require('request');
 var apiKey = "";
 var camRegion = "";
+var callTest = "";
 
 
 module.exports = NodeHelper.create({
@@ -79,6 +80,7 @@ module.exports = NodeHelper.create({
         this.sendSocketNotification("TRAFFIC_CAM_LIST2", tempList);
 
     },
+
     
     testGrab: function () {
         var self = this;
@@ -96,7 +98,7 @@ module.exports = NodeHelper.create({
 
         console.log("MMM-TrafficCam url: " + options["url"]);
 
-        getRegion: function() {
+        function getRegion() {
             console.log("MMM-TrafficCam getRegion: " + this.camRegion);
             return this.camRegion
         };
@@ -105,6 +107,9 @@ module.exports = NodeHelper.create({
             if (!error && response.statusCode == 200) {
                 console.log("MMM-TrafficCam statusCode: " + response.statusCode);
                 // get our images out of the INSTAGRAM JSON response
+                this.callTest = "CALL TEST SUCCESS";
+                console.log("MMM-TrafficCam starting call test...");
+                console.log("MMM-TRAFFICCAM CALL TEST: " + this.callTest);
                 var items = JSON.parse(body);
                 var tempRegion = "";
                 var camRegion = getRegion();
