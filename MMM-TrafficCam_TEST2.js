@@ -34,6 +34,7 @@ Module.register('MMM-TrafficCam', {
     grabCams: function() {
         var tempList = [];
         var tempObject = {};
+        var tempObject2 = {};
         tempObject = {
             "type": "Feature",
             "id": "d2e6035",
@@ -53,7 +54,7 @@ Module.register('MMM-TrafficCam', {
             }
         };
         tempList.push(tempObject);
-        tempObject = {
+        tempObject2 = {
             "type": "Feature",
             "id": "d2e6036",
             "geometry": {
@@ -71,11 +72,11 @@ Module.register('MMM-TrafficCam', {
                 "href": "http://www.rms.nsw.gov.au/trafficreports/cameras/camera_images/burntbrdg_seaforth.jpg"
             }
         };
-        tempList.push(tempObject);
+        tempList.push(tempObject2);
 
         this.imageList = tempList;
-        this.updateDome(1000);
-        this.scheduleUpdate;
+        this.updateDom(1000);
+        this.scheduleUpdate();
     },
 
     /*
@@ -91,6 +92,9 @@ Module.register('MMM-TrafficCam', {
             this.scheduleUpdate();
         }
     },
+    */
+
+
 
     scheduleUpdate: function () {
         setInterval(function () {
@@ -98,7 +102,7 @@ Module.register('MMM-TrafficCam', {
             console.log('update')
         }, this.config.updateInterval);
     },
-    */
+    
 
 
     getStyles: function () {
