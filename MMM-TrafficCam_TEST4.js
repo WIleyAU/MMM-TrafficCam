@@ -33,53 +33,7 @@ module.exports = NodeHelper.create({
         }
     },
 
-    retrieveAndUpdate: function () {
-        var self = this;
-
-        var tempList = [];
-        var tempObject = {};
-        var tempObject2 = {};
-        tempObject = {
-            "type": "Feature",
-            "id": "d2e6035",
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    151.205623,
-                    -33.865088
-                ]
-            },
-            "properties": {
-                "region": "SYD_MET",
-                "title": "York Street (Sydney)",
-                "view": "York Street at Margaret Street looking north towards Sydney Harbour Bridge.",
-                "direction": "N",
-                "href": "http://www.rms.nsw.gov.au/trafficreports/cameras/camera_images/yorkst_sydney.jpg"
-            }
-        };
-        tempList.push(tempObject);
-        tempObject2 = {
-            "type": "Feature",
-            "id": "d2e6036",
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                        151.265661,
-                    -33.788582
-                ]
-            },
-            "properties": {
-                "region": "SYD_NORTH",
-                "title": "Burnt Bridge Creek (Balgowlah)",
-                "view": "Burnt Bridge Creek at Condamine Street looking north towards Dee Why.",
-                "direction": "N",
-                "href": "http://www.rms.nsw.gov.au/trafficreports/cameras/camera_images/burntbrdg_seaforth.jpg"
-            }
-        };
-        tempList.push(tempObject2);
-        this.sendSocketNotification("TRAFFIC_CAM_LIST2", tempList);
-
-    },
+  
 
     
     testGrab: function () {
@@ -98,11 +52,6 @@ module.exports = NodeHelper.create({
 
         console.log("MMM-TrafficCam url: " + options["url"]);
 
-        function getRegion() {
-            console.log("MMM-TrafficCam getRegion: " + this.camRegion);
-            return this.camRegion
-        };
-
         request(options, function (error, response, body) {
             if (!error && response.statusCode == 200) {
                 console.log("MMM-TrafficCam statusCode: " + response.statusCode);
@@ -112,8 +61,7 @@ module.exports = NodeHelper.create({
                 console.log("MMM-TRAFFICCAM CALL TEST: " + this.callTest);
                 var items = JSON.parse(body);
                 var tempRegion = "";
-                var camRegion = getRegion();
-                console.log("MMM-TrafficCams IN REQUEST camRegion: " + camRegion);
+                console.log("MMM-TrafficCams IN REQUEST camRegion: " + this.camRegion);
                 console.log("MMM-TrafficCam items: " + items);
                 // create our model, a dictionary with 
                 var images = [];
@@ -123,7 +71,7 @@ module.exports = NodeHelper.create({
                     console.log("MMM-TrafficCam results.properties.region: " + results.properties.region);
                     tempRegion = results.properties.region;
                     console.log("MMM-TrafficCam tempRegion: " + tempRegion);
-                    console.log("MMM-TrafficCam IN REQUEST tempRegion(" + tempRegion + ") = camRegion(" + camRegion + ")");
+                    console.log("MMM-TrafficCam IN REQUEST tempRegion(" + tempRegion + ") = camRegion(" + this.camRegion + ")");
                     if (tempRegion == this.camRegion) {
                         console.log("MMM-TrafficCam this.config.camRegion: " + this.camRegion);
                         images.push(results);
@@ -140,9 +88,11 @@ module.exports = NodeHelper.create({
             else {
                 console.log(" Error: " + response.statusCode);
             }
-        });
+        }.bind({camRegion:this.camRegion}));
     }
     
 });
 
 
+Contact GitHub API Training Shop Blog About
+© 2017 GitHub, Inc. Terms Privacy Security Status Help
