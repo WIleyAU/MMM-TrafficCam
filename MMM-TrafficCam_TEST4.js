@@ -87,7 +87,7 @@ module.exports = NodeHelper.create({
                 });
                 console.log("MMM-TrafficCam images length final: " + images.length);
                 console.log("MMM-TrafficCam: Sending Socket Notification");
-                self.sendSocketNotification('TRAFFIC_CAM_LIST', items);
+                self.sendSocketNotification('TRAFFIC_CAM_LIST', images);
                 //console.log(images)
 
             }

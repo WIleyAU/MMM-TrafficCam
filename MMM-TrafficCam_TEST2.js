@@ -90,7 +90,7 @@ Module.register('MMM-TrafficCam', {
     },
 
     filterImages: function(items) {
-        items.features.forEach(function (results) {
+        items.forEach(function (results) {
             console.log("MMM-TrafficCam forEach start check...");
             console.log("MMM-TrafficCam results.properties.region: " + results.properties.region);
             if (results.properties.region == this.camRegion) {
@@ -105,6 +105,8 @@ Module.register('MMM-TrafficCam', {
 
     socketNotificationReceived: function(notification, payload) {
         if (notification === "TRAFFIC_CAM_LIST") {
+            console.log("MMM-TrafficCam Payload RECEIVED");
+            console.log("MMM-TrafficCam Payload Length: " + payload.length);
             this.filterImages(payload);
         }
     },
