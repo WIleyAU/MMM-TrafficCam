@@ -30,17 +30,17 @@ module.exports = NodeHelper.create({
             url: "https://api.transport.nsw.gov.au/v1/live/cameras",
             //port: 443,
             //path: "/v1/live/cameras",
-           // method: "GET",
+            method: "GET",
             headers: {
                 "Accept": "application/json",
                 "Authorization": "apikey " + this.config.apiKey
             }
         };
 
-        request.get(options, function(error, response, body)
+        request(options, function(error, response, body)
         {
-            if (!error && response.statusCode == 200)
-            {
+        //    if (!error && response.statusCode == 200)
+          //  {
                 var items = JSON.parse(body);
 
                 var camList = [];
@@ -51,7 +51,7 @@ module.exports = NodeHelper.create({
                     }
                 });
                 this.sendSocketNotification("TRAFFIC_CAM_LIST", camList);
-            }
+            //}
         });
 
 });
