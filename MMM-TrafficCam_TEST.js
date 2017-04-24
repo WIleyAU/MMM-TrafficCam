@@ -64,12 +64,13 @@ Module.register('MMM-TrafficCam', {
             if (this.config.imageSize > 800) {
                 this.url = this.hiResImageUrls[this.config.style];
             } else {
-                if (this.activeItem >= this.imageList.length) {
-                    this.activeItem = 0
-                };
+          //      if (this.activeItem >= this.imageList.length) {
+          //          this.activeItem = 0
+          //      };
                 this.url = this.imageList[this.activeItem][this.config.style];
             }
             setInterval(function () {
+               // self.updateDom(1000);
                 this.activeItem++;
                 self.updateDom(1000);
                 console.log('update')
@@ -90,6 +91,9 @@ Module.register('MMM-TrafficCam', {
             wrapper.style.overflow = "hidden";
         }
 
+        if (this.activeItem >= this.imageList.length) {
+            this.activeItem = 0;
+        }
 
         var image = document.createElement("img");
         if (this.config.ownImagePath != '') {
