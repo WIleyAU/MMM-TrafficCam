@@ -4,7 +4,7 @@
  * By Scott Kemble
  * Apache 2.0 Licensed.
  */
-//comment
+
 var NodeHelper = require('node_helper');
 var request = require('request');
 
@@ -69,37 +69,7 @@ module.exports = NodeHelper.create({
         tempList.push(tempObject2);
         this.sendSocketNotification("TRAFFIC_CAM_LIST", tempList);
 
-        /*
-        var options = {
-            url: "https://api.transport.nsw.gov.au/v1/live/cameras",
-            //port: 443,
-            //path: "/v1/live/cameras",
-            method: "GET",
-            headers: {
-                "Accept": "application/json",
-                "Authorization": "apikey " + this.config.apiKey
-            }
-        };
-
-        request(options, function(error, response, body)
-        {
-            if (!error && response.statusCode == 200)
-            {
-                var items = JSON.parse(body);
-
-                var camList = [];
-
-                items.features.forEach(function (result) {
-                    if (result.properties.region == this.config.camRegion) {
-                        camList.push(items.features);
-                    }
-                });
-                this.sendSocketNotification("TRAFFIC_CAM_LIST", camList);
-            }
-            
-        });
-*/
-    };
+    }
 
 });
 
