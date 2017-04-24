@@ -26,6 +26,7 @@ module.exports = NodeHelper.create({
     retrieveAndUpdate: function () {
         var self = this;
 
+        /*
         var options = {
             url: "https://api.transport.nsw.gov.au/v1/live/cameras",
             //port: 443,
@@ -36,8 +37,10 @@ module.exports = NodeHelper.create({
                 "Authorization": "apikey " + this.config.apiKey
             }
         };
+        */
 
-        request(options, function(error, response, body)
+        request({url: "https://api.transport.nsw.gov.au/v1/live/cameras", method: "GET", headers: {"Accept": "application/json",
+                    "Authorization": "apikey " + this.config.apiKey}, function(error, response, body)
         {
         //    if (!error && response.statusCode == 200)
           //  {
