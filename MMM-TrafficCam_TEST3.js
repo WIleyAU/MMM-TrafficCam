@@ -75,10 +75,6 @@ Module.register('MMM-TrafficCam', {
         }
         */
         this.grabCams();
-        setInterval(function () {
-            self.updateDom(1000);
-            console.log('update')
-        }, this.config.updateInterval);
     },
 
     grabCams: function() {
@@ -119,6 +115,11 @@ Module.register('MMM-TrafficCam', {
 
         //return imageList;
         this.imageList = imageList;
+        this.scheduleUpdate();
+    },
+
+    scheduleUpdate: function() {
+        this.activeItem++;
         setInterval(function () {
             self.updateDom(1000);
             console.log('update')
@@ -145,7 +146,7 @@ Module.register('MMM-TrafficCam', {
             this.activeItem = 0;
         }
         this.url = this.imageList[this.activeItem][this.config.style];
-        this.activeItem++;
+//        this.activeItem++;
 
         var image = document.createElement("img");
         if (this.config.ownImagePath != '') {
