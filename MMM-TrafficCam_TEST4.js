@@ -101,6 +101,7 @@ module.exports = NodeHelper.create({
                 console.log("MMM-TrafficCam statusCode: " + response.statusCode);
                 // get our images out of the INSTAGRAM JSON response
                 var items = JSON.parse(body);
+                var tempRegion = "";
                 console.log("MMM-TrafficCam items: " + items);
                 // create our model, a dictionary with 
                 var images = [];
@@ -108,7 +109,9 @@ module.exports = NodeHelper.create({
                 items.features.forEach(function (results) {
                     console.log("MMM-TrafficCam forEach start check...");
                     console.log("MMM-TrafficCam results.properties.region: " + results.properties.region);
-                    if (results.properties.region == this.camRegion) {
+                    tempRegion = results.properties.region;
+                    console.log("MMM-TrafficCam tempRegion: " + tempRegion);
+                    if (tempRegion == this.camRegion) {
                         console.log("MMM-TrafficCam this.config.camRegion: " + this.camRegion);
                         images.push(results);
                         console.log("MMM-TrafficCam images length working: " + images.length);
