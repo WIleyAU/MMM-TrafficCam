@@ -70,7 +70,7 @@ module.exports = NodeHelper.create({
         this.sendSocketNotification("TRAFFIC_CAM_LIST", tempList);
 
     },
-
+    /*
     testGrab: function () {
         var self = this;
         console.log('retrieveAndUpdate()');
@@ -85,7 +85,7 @@ module.exports = NodeHelper.create({
             }
         };
 
-        callback: function(error, response, body) {
+        request(options, function (error, response, body) {
             if (!error && response.statusCode == 200) {
                 // get our images out of the INSTAGRAM JSON response
                 var items = JSON.parse(body);
@@ -94,24 +94,21 @@ module.exports = NodeHelper.create({
                 var images = [];
 
                 items.features.forEach(function (results) {
-                    if (results.properties.region == this.config.camRegion) {
+                    if (results.properties.region == camRegion) {
                         images.push(results);
                     };
-                    
+
                 });
-                self.sendSocketNotification('TRAFFIC_CAM_LIST', images);
-                
+                //self.sendSocketNotification('TRAFFIC_CAM_LIST', images);
+                console.log(images)
+
             }
             else {
                 console.log(" Error: " + response.statusCode);
             }
-        };
-
-        //Get image URLs
-        request(options, callback);
-
+        });
     }
-
+    */
 });
 
 
