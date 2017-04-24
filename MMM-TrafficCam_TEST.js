@@ -16,7 +16,7 @@ Module.register('MMM-TrafficCam', {
         camRegion: "SYD_MET",
         apiKey: "",
         loadingText: "Loading...",
-        style: 'geoColor',
+        style: 'natColor',
         ownImagePath: ''
     },
 
@@ -24,6 +24,8 @@ Module.register('MMM-TrafficCam', {
     start: function () {
         self = this;
         this.url = '';
+        this.activeItem = 0;
+        this.urlList = [];
         this.imageUrls = {
             'natColor': 'http://www.rms.nsw.gov.au/trafficreports/cameras/camera_images/anzacbr.jpg',
             'geoColor': 'http://rammb.cira.colostate.edu/ramsdis/online/images/latest/himawari-8/full_disk_ahi_true_color.jpg',
@@ -35,7 +37,7 @@ Module.register('MMM-TrafficCam', {
 
         }
         this.hiResImageUrls = {
-            'natColor': 'http://www.rms.nsw.gov.au/trafficreports/cameras/camera_images/anzacbr.jpg',
+            'natColor': 'http://www.rms.nsw.gov.au/trafficreports/cameras/camera_images/harbourbridge.jpg',
             'geoColor': 'http://rammb.cira.colostate.edu/ramsdis/online/images/latest_hi_res/himawari-8/full_disk_ahi_true_color.jpg',
             'airMass': 'http://rammb.cira.colostate.edu/ramsdis/online/images/latest_hi_res/himawari-8/full_disk_ahi_rgb_airmass.jpg',
             'fullBand': 'http://rammb.cira.colostate.edu/ramsdis/online/images/latest/himawari-8/himawari-8_band_03_sector_02.gif',
@@ -44,15 +46,21 @@ Module.register('MMM-TrafficCam', {
             'centralAmericaDiscNat': 'http://www.rms.nsw.gov.au/trafficreports/cameras/camera_images/harbourbridge.jpg'
         }
         console.log(this.imageUrls[this.config.style]);
+        this.urlList.push(this.imageURLs);
+        this.urlList.push(this.hiResImageUrls);
+        if (this.activeItem >= this.urlList.length) {
+            this.activeItem = 0
+        };
         if (this.config.ownImagePath != '') {
             this.url = this.config.ownImagePath;
         } else {
             if (this.config.imageSize > 800) {
-                this.url = this.hiResImageUrls[this.config.style];
+                this.url = this.urlList[this.activeItem].hiResImageUrls[this.config.style];
             } else {
-                this.url = this.imageUrls[this.config.style];
+                this.url = this.urlList[this.activeItem].imageUrls[this.config.style];
             }
             setInterval(function () {
+                this.activeItem++;
                 self.updateDom(1000);
                 console.log('update')
             }, this.config.updateInterval);
