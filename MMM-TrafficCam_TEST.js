@@ -17,15 +17,14 @@ Module.register('MMM-TrafficCam', {
         apiKey: "",
         loadingText: "Loading...",
         style: 'natColor',
-        ownImagePath: ''
+        ownImagePath: '',
+        test: false
     },
 
 
     start: function () {
         self = this;
         this.url = '';
-        this.activeItem = 0;
-        this.urlList = [];
         this.imageUrls = {
             'natColor': 'http://www.rms.nsw.gov.au/trafficreports/cameras/camera_images/anzacbr.jpg',
             'geoColor': 'http://rammb.cira.colostate.edu/ramsdis/online/images/latest/himawari-8/full_disk_ahi_true_color.jpg',
@@ -46,25 +45,44 @@ Module.register('MMM-TrafficCam', {
             'centralAmericaDiscNat': 'http://www.rms.nsw.gov.au/trafficreports/cameras/camera_images/harbourbridge.jpg'
         }
         console.log(this.imageUrls[this.config.style]);
-        this.urlList.push(this.imageURLs);
-        this.urlList.push(this.hiResImageUrls);
-        if (this.activeItem >= this.urlList.length) {
-            this.activeItem = 0
-        };
-        if (this.config.ownImagePath != '') {
-            this.url = this.config.ownImagePath;
-        } else {
-            if (this.config.imageSize > 800) {
-                this.url = this.hiResImageUrls[this.config.style];
+        if (this.test == false) {
+            if (this.config.ownImagePath != '') {
+                this.url = this.config.ownImagePath;
             } else {
-                this.url = this.imageUrls[this.config.style];
+                if (this.config.imageSize > 800) {
+                    this.url = this.hiResImageUrls[this.config.style];
+                } else {
+                    this.url = this.imageUrls.[this.config.style];
+                }
+                setInterval(function () {
+                    self.updateDom(1000);
+                    console.log('update')
+                }, this.config.updateInterval);
             }
-            setInterval(function () {
-                this.activeItem++;
-                self.updateDom(1000);
-                console.log('update')
-            }, this.config.updateInterval);
+        } else {
+            var activeItem = 0;
+            var urlList = [];
+            this.urlList.push(this.imageUrls);
+            this.urlList.push(this.hiResImageUrls);
+            if (this.activeItem >= this.urlList.length) {
+                this.activeItem = 0
+            };
+            if (this.config.ownImagePath != '') {
+                this.url = this.config.ownImagePath;
+            } else {
+                if (this.config.imageSize > 800) {
+                    this.url = this.hiResImageUrls[this.config.style];
+                } else {
+                    this.url = this.urlList[this.activeItem].[this.config.style];
+                }
+                setInterval(function () {
+                    this.activeItem++;
+                    self.updateDom(1000);
+                    console.log('update')
+                }, this.config.updateInterval);
+            }
         }
+
     },
 
     getStyles: function () {
