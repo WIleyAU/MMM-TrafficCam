@@ -7,6 +7,7 @@
 
 var NodeHelper = require('node_helper');
 var request = require('request');
+var apiKey = "";
 
 
 module.exports = NodeHelper.create({
@@ -17,9 +18,10 @@ module.exports = NodeHelper.create({
     },
 
     // Subclass socketNotificationReceived received.
-    socketNotificationReceived: function(notification) {
+    socketNotificationReceived: function(notification, apiKey) {
         if (notification === 'TRAFFIC_CAM_GET') {
-            this.retrieveAndUpdate();
+            this.apiKey = apiKey;
+            this.testGrab();
         }
     },
 
@@ -67,10 +69,10 @@ module.exports = NodeHelper.create({
             }
         };
         tempList.push(tempObject2);
-        this.sendSocketNotification("TRAFFIC_CAM_LIST", tempList);
+        this.sendSocketNotification("TRAFFIC_CAM_LIST2", tempList);
 
     },
-    /*
+    
     testGrab: function () {
         var self = this;
         console.log('retrieveAndUpdate()');
@@ -81,7 +83,7 @@ module.exports = NodeHelper.create({
             method: "GET",
             headers: {
                 "Accept": "application/json",
-                "Authorization": "apikey " + this.config.apiKey
+                "Authorization": "apikey " + this.apiKey
             }
         };
 
@@ -94,13 +96,13 @@ module.exports = NodeHelper.create({
                 var images = [];
 
                 items.features.forEach(function (results) {
-                    if (results.properties.region == camRegion) {
+                    if (results.properties.region == this.config.camRegion) {
                         images.push(results);
                     };
 
                 });
-                //self.sendSocketNotification('TRAFFIC_CAM_LIST', images);
-                console.log(images)
+                self.sendSocketNotification('TRAFFIC_CAM_LIST', images);
+                //console.log(images)
 
             }
             else {
@@ -108,7 +110,7 @@ module.exports = NodeHelper.create({
             }
         });
     }
-    */
+    
 });
 
 
