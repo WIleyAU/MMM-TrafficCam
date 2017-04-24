@@ -35,12 +35,6 @@ module.exports = NodeHelper.create({
             this.filterImages();
         }
     },
-
-    filterImages: function() {
-
-
-    },
-
     
     testGrab: function () {
         var self = this;
@@ -80,11 +74,15 @@ module.exports = NodeHelper.create({
                     tempRegion = results.properties.region;
                     console.log("MMM-TrafficCam tempRegion: " + tempRegion);
                     console.log("MMM-TrafficCam IN REQUEST tempRegion(" + tempRegion + ") = camRegion(" + this.camRegion + ")");
+                    images.push(results);
+
+                    /*
                     if (tempRegion == this.camRegion) {
                         console.log("MMM-TrafficCam this.config.camRegion: " + this.camRegion);
                         images.push(results);
                         console.log("MMM-TrafficCam images length working: " + images.length);
                     };
+                    */
 
                 });
                 console.log("MMM-TrafficCam images length final: " + images.length);

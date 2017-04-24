@@ -105,7 +105,7 @@ Module.register('MMM-TrafficCam', {
 
     socketNotificationReceived: function(notification, payload) {
         if (notification === "TRAFFIC_CAM_LIST") {
-            filterImages(payload);
+            this.filterImages(payload);
         }
     },
     
