@@ -40,6 +40,7 @@ Module.register('MMM-TrafficCam', {
 
     grabCams: function () {
         console.log("MMM-TrafficCam grabbing photos...");
+        /*
         this.camList.cams.push({
             "camID": "d2e649",
             "camTitle": "Anzac Bridge",
@@ -61,6 +62,14 @@ Module.register('MMM-TrafficCam', {
             "camDirection": "S",
             "camURL": "http://www.rms.nsw.gov.au/trafficreports/cameras/camera_images/harbourbridge.jpg"
         });
+        */
+        this.CamList.cams = {
+            "camID": "d2e649",
+            "camTitle": "Anzac Bridge",
+            "camView": "Intersection of Victoria Road and Anzac Bridge looking east towards the Sydney CBD.",
+            "camDirection": "E",
+            "camURL": "http://www.rms.nsw.gov.au/trafficreports/cameras/camera_images/anzacbr.jpg"
+        };
         this.displayCams();
     },
 
