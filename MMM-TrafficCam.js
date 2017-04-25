@@ -45,7 +45,7 @@ Module.register('MMM-TrafficCam', {
                 this.imageList.push(tempListf[i])
             };
         };
-        this.updateDom(1000);
+        this.updateDom(this.config.animationSpeed);
         this.scheduleUpdate();
     },
 
@@ -53,7 +53,7 @@ Module.register('MMM-TrafficCam', {
         if (notification === "TRAFFIC_CAM_LIST") {
             this.tempList = payload;
             if (!this.loaded) {
-                this.updateDom(1000);
+                this.updateDom(this.config.animationSpeed);
                 this.filterImages();
             }
             this.loaded = true;
@@ -65,7 +65,7 @@ Module.register('MMM-TrafficCam', {
 
     scheduleUpdate: function () {
         setInterval(function () {
-            self.updateDom(1000);
+            self.updateDom(this.config.animationSpeed);
             console.log('update')
         }, this.config.updateInterval);
     },
