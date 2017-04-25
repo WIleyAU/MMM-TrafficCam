@@ -91,7 +91,8 @@ Module.register('MMM-TrafficCam', {
         if (this.activeItem >= this.imageList.length) {
             this.activeItem = 0;
         }
-        this.url = this.imageList[this.activeItem]["properties"]["href"];
+        //this.url = this.imageList[this.activeItem]["properties"]["href"];
+        this.url = "http://www.rms.nsw.gov.au/trafficreports/cameras/camera_images/anzacbr.jpg";
         this.activeItem++;
 
     
