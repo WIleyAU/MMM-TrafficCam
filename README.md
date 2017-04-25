@@ -1,6 +1,6 @@
 MMM-TrafficCam
 ===================
-This is a module for the [MagicMirror](https://github.com/MichMich/MagicMirror). It displays live images from traffic cameras throughout NSW Australia. It can also display a custom subset of traffic camera images. [yet to be implemented]
+This is a module for the [MagicMirror](https://github.com/MichMich/MagicMirror). It displays live images from traffic cameras throughout NSW Australia. It can also display a custom subset of traffic camera images.
 
 ## Installation
 Navigate into your MagicMirror's `modules` folder and execute `git clone https://github.com/WIleyAU/MMM-TrafficCam.git`.
@@ -16,7 +16,7 @@ The entry in `config.js` can include the following options:
 |---|---|
 |`apiKey`|api key used to retrieve the live traffic camera images, available from tfNSW.<br><br>**Type:** `String`<br>This value is **REQUIRED**|
 |`camRegion`|NSW Region to display traffic camera images from.<br>Valid values are ALL, SYD_MET, SYD_SOUTH, SYD_NORTH, SYD_WEST, REG_NORTH, REG_SOUTH<br><br>**Type:** `String`<br>**Default value:** SYD_MET<br>This value is OPTIONAL|
-|`camCust`|Array of individual camera IDs to display INSTEAD of the default regional group.<br>A value entered here will OVERWRITE `camRegion`<br><br>**Type:** `Array`<br>**Default value:** []<br>This value is OPTIONAL|
+|`camCust`|Array of individual camera IDs to display INSTEAD of the default regional group.<br> Example: camCust: ["d2e649","d2e3350","d2e5175","d2e2648","d2e38","d2e3871"]<br>A value entered here will OVERWRITE `camRegion`<br><br>**Type:** `Array`<br>**Default value:** []<br>This value is OPTIONAL|
 |`imageSize`|Display size of the image<br><br>**Type:** `Integer`<br>**Default value:** 400<br>This value is OPTIONAL|
 |`animationSpeed`|Fade in and fade out speed of the individual camera images<br><br>**Type:** `Integer`<br>**Default value:** 1000<br>This value is OPTIONAL|
 |`updateInterval`|How often the the images are updated.<br><br>**Type:** `Integer`<br>**Default value:** 10000<br>This value is OPTIONAL|
