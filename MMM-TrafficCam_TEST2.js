@@ -44,15 +44,15 @@ Module.register('MMM-TrafficCam', {
         this.tempList.forEach(function (results) {
             console.log("MMM-TrafficCam forEach start check...");
             console.log("MMM-TrafficCam results.properties.region: " + results.properties.region);
-            if (results.properties.region == this.config.camRegion) {
+//            if (results.properties.region == this.config.camRegion) {
                 console.log("MMM-TrafficCam this.config.camRegion: " + this.config.camRegion);
                 this.imageList.push(results);
                 console.log("MMM-TrafficCam images length working: " + this.imageList.length);
-            };
+ //           };
         });
         //this.updateDom(1000);
         //this.scheduleUpdate();
-        this.url = "http://www.rms.nsw.gov.au/trafficreports/cameras/camera_images/anzacbr.jpg";
+//        this.url = "http://www.rms.nsw.gov.au/trafficreports/cameras/camera_images/anzacbr.jpg";
     },
 
     socketNotificationReceived: function(notification, payload) {
@@ -104,6 +104,7 @@ Module.register('MMM-TrafficCam', {
         image.height = this.config.imageSize.toString();
 
         name.innerHTML = "" + this.url;
+        //name.innerHTML = "Payload Length" + this.imageList.length;
 
         header.appendChild(name);
         wrapper.appendChild(image);
