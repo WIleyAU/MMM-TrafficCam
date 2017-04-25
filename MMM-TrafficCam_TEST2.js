@@ -76,14 +76,20 @@ Module.register('MMM-TrafficCam', {
     getDom: function () {
         var wrapper = document.createElement("div");
         var header = document.createElement("header");
+        var name2 = document.createElement("span");
         var name = document.createElement("span");
         var table = document.createElement("table");
+        var imgTitle = "";
+        var imgDir = "";
 
         if (this.activeItem >= this.imageList.length) {
             this.activeItem = 0;
         }
         this.url = this.imageList[this.activeItem]["properties"]["href"];
-        
+        imgTitle = this.imageList[this.activeItem]["properties"]["title"];
+        imgDir = this.imageList[this.activeItem]["properties"]["direction"];
+        this.activeItem++;
+
         var image = document.createElement("img");
         image.src = this.url;
         image.className = 'MMM-TrafficCam';
@@ -91,11 +97,12 @@ Module.register('MMM-TrafficCam', {
         image.height = this.config.imageSize.toString();
 
         //name.innerHTML = "" + this.url;
-        name.innerHTML = "" + this.imageList[this.activeItem]["properties"]["title"] + " Dir: " + this.imageList[this.activeitem]["properties"]["direction"];
+        name.innerHTML = "" + imgTitle;
+        name2.innerHTML = "View: " + imgDir;
 
-        this.activeItem++;
         
         header.appendChild(name);
+        header.appendChild(name2);
         wrapper.appendChild(image);
         wrapper.appendChild(header);
 
