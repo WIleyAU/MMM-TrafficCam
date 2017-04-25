@@ -128,12 +128,14 @@ Module.register('MMM-TrafficCam', {
         wrapper.appendChild(header);
         wrapper.appendChild(header2);
         */
-
+        /*
         header.appendChild(name);
         wrapper.appendChild(image);
         wrapper.appendChild(header);
         wrapper.appendChild(table);
+        */
 
-        return wrapper;
+        //return wrapper;
+        return table;
     }
 });
