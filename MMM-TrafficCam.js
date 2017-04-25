@@ -15,10 +15,7 @@ Module.register('MMM-TrafficCam', {
         camID: "",
         camRegion: "SYD_MET",
         apiKey: "",
-        loadingText: "Loading...",
-        style: 'natColor',
-        ownImagePath: '',
-        test: false
+        loadingText: "Loading..."
     },
 
     start: function () {
