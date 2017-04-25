@@ -8,7 +8,7 @@
 Module.register('MMM-TrafficCam', {
 
     defaults: {
-        updateInterval: 300000,
+        updateInterval: 10000,
         animationSpeed: 1000,
         header: '',
         imageSize: 400,
