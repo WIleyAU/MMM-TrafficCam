@@ -1,26 +1,28 @@
-MMM-TrafficCam
-
+###MMM-TrafficCam
+==========================
 This a module for the MagicMirror. It pulls images from live traffic camera feeds around NSW Australia (requires API_KEY). The photos are then rotated and animated in the screen.
 
-Installation
+##Installation
 
-Navigate into your MagicMirror's modules folder and execute git clone https://github.com/WIleyAU/MMM-TrafficCam. A new folder will appear, navigate into it.
+Navigate into your MagicMirror's modules folder and execute git clone https://github.com/WIleyAU/MMM-TrafficCam.git A new folder will appear, navigate into it.
 Execute npm install to install the node dependencies.
-Config
+
+##Config
 
 The entry in config.js can include the following options:
 
 
 
-Option	Description
-apiKey	Access token which is received from tfNSW
+|Option|Description|
+|---|---|
+|apiKey|Access token which is received from tfNSW
 
 Type: string
-This value is REQUIRED
-camRegion	NSW Region to display traffic camera images from.
+This value is REQUIRED|
+|camRegion|NSW Region to display traffic camera images from.
 Valid values are ALL, SYD_MET, SYD_SOUTH, SYD_WEST, SYD_NORTH, REG_NORTH, REG_SOUTH
 Default: SYD_MET
-This value is OPTIONAL
+This value is OPTIONAL|
 camGroup	Array of camera IDs to display. Overwrites camRegion
 Default: []
 This value is OPTIONAL
