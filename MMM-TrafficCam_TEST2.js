@@ -39,36 +39,19 @@ Module.register('MMM-TrafficCam', {
     filterImages: function () {
         var tempListf = [];
         tempListf = this.tempList;
-        //this.imageList = tempListf;
         for (var i = 0, len = tempListf.length; i < len; i++) {
             if (tempListf[i]["properties"]["region"] == this.config.camRegion) {
                 this.imageList.push(tempListf[i])
             };
         };
-
-
-//        tempListf.features.forEach(function (results) {
-//            console.log("MMM-TrafficCam forEach start check...");
-//            console.log("MMM-TrafficCam results.properties.region: " + results.properties.region);
-//            if (results.properties.region == this.config.camRegion) {
-//                console.log("MMM-TrafficCam this.config.camRegion: " + this.config.camRegion);
-//                this.imageList.push(results);
-//                console.log("MMM-TrafficCam images length working: " + this.imageList.length);
-//           };
-//        });
-        //       this.url = "http://www.rms.nsw.gov.au/trafficreports/cameras/camera_images/anzacbr.jpg";
         this.updateDom(1000);
         this.scheduleUpdate();
     },
 
     socketNotificationReceived: function(notification, payload) {
         if (notification === "TRAFFIC_CAM_LIST") {
-            console.log("MMM-TrafficCam Payload RECEIVED");
-            console.log("MMM-TrafficCam Payload Length: " + payload.length);
             this.tempList = payload;
             this.filterImages();
-//            this.updateDom(1000);
-//            this.scheduleUpdate();
         }
     },
     
@@ -94,15 +77,13 @@ Module.register('MMM-TrafficCam', {
         var wrapper = document.createElement("div");
         var header = document.createElement("header");
         var name = document.createElement("span");
+        var table = document.createElement("table");
 
         if (this.activeItem >= this.imageList.length) {
             this.activeItem = 0;
         }
         this.url = this.imageList[this.activeItem]["properties"]["href"];
         
-        this.activeItem++;
-
-    
         var image = document.createElement("img");
         image.src = this.url;
         image.className = 'MMM-TrafficCam';
@@ -110,8 +91,10 @@ Module.register('MMM-TrafficCam', {
         image.height = this.config.imageSize.toString();
 
         //name.innerHTML = "" + this.url;
-        name.innerHTML = "Payload Length" + this.tempList.length;
+        name.innerHTML = "" + this.imageList[this.activeItem]["properties"]["title"] + " Dir: " + this.imageList[this.activeitem]["properties"]["direction"];
 
+        this.activeItem++;
+        
         header.appendChild(name);
         wrapper.appendChild(image);
         wrapper.appendChild(header);
