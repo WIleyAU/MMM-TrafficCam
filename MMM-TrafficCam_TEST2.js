@@ -96,15 +96,15 @@ Module.register('MMM-TrafficCam', {
 
 
         table.innerHTML = '<tr>' +
-                        '<td class="title" style="text-align:Right;">' + this.translate("CAM DIRECTION") + ':&nbsp;</td>' +
+                        '<td class="title" style="text-align:Right;"> CAM DIRECTION:&nbsp;</td>' +
                         '<td class="value" style="text-align:left;">' + camDir + '</td>' +
                         '</tr>' +
                         '<tr>' +
-                        '<td class="title" style="text-align:Right;">' + this.translate("CAM REGION") + ':&nbsp;</td>' +
+                        '<td class="title" style="text-align:Right;">CAM REGION:&nbsp;</td>' +
                         '<td class="value" style="text-align:left;">' + camReg + '</td>' +
                         '</tr>' +
                         '<tr>' +
-                        '<td class="title" style="text-align:Right;">' + this.translate("CAM DESCRIPTION") + ':&nbsp;</td>' +
+                        '<td class="title" style="text-align:Right;">CAM DESCRIPTION:&nbsp;</td>' +
                         '<td class="value" style="text-align:left;">' + camDesc + '</td>' +
                         '</tr>';
 
