@@ -9,7 +9,7 @@ Module.register('MMM-TrafficCam', {
 
     defaults: {
         updateInterval: 300000,
-        animationSpeed: 0,
+        animationSpeed: 1000,
         header: '',
         imageSize: 400,
         camCust: [],
@@ -61,6 +61,7 @@ Module.register('MMM-TrafficCam', {
 
 
     scheduleUpdate: function () {
+        this.updateDom(this.config.animationSpeed);
         setInterval(function () {
             self.updateDom(this.config.animationSpeed);
             console.log('update')
