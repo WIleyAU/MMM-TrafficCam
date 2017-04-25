@@ -59,6 +59,7 @@ Module.register('MMM-TrafficCam', {
             console.log("MMM-TrafficCam Payload RECEIVED");
             console.log("MMM-TrafficCam Payload Length: " + payload.length);
             this.tempList = payload;
+            this.url = "http://www.rms.nsw.gov.au/trafficreports/cameras/camera_images/anzacbr.jpg";
             this.filterImages();
             this.updateDom(1000);
             this.scheduleUpdate();
@@ -92,7 +93,7 @@ Module.register('MMM-TrafficCam', {
             this.activeItem = 0;
         }
         //this.url = this.imageList[this.activeItem]["properties"]["href"];
-        this.url = "http://www.rms.nsw.gov.au/trafficreports/cameras/camera_images/anzacbr.jpg";
+        
         this.activeItem++;
 
     
