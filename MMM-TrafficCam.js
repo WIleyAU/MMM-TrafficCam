@@ -38,12 +38,18 @@ Module.register('MMM-TrafficCam', {
         var tempListf = [];
         tempListf = this.tempList;
         for (var i = 0, len = tempListf.length; i < len; i++) {
-            if (this.config.camRegion == "ALL") {
-                this.imageList.push(tempListf[i])
+            if (this.config.camCust.length > 0) {
+                if (this.config.camCust.indexOf(tempListf[i]["id"]) > -1) {
+                    this.imageList.push(tempListf[i])
+                };
             } else {
-            if (tempListf[i]["properties"]["region"] == this.config.camRegion) {
-                this.imageList.push(tempListf[i])
-            };
+                if (this.config.camRegion == "ALL") {
+                    this.imageList.push(tempListf[i])
+                } else {
+                    if (tempListf[i]["properties"]["region"] == this.config.camRegion) {
+                        this.imageList.push(tempListf[i])
+                    };
+                };
             };
         };
         this.updateDom(this.config.animationSpeed);
@@ -88,7 +94,7 @@ Module.register('MMM-TrafficCam', {
         var imgDir = "";
 
         if (!this.loaded) {
-            wrapper.innerHTML = "Loading...";
+            wrapper.innerHTML = "Loading Traffic Cams...";
             return wrapper;
         }
 
