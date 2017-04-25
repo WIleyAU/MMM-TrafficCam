@@ -8,7 +8,6 @@
 var NodeHelper = require('node_helper');
 var request = require('request');
 var apiKey = "";
-var camRegion = "";
 
 
 module.exports = NodeHelper.create({
@@ -21,9 +20,7 @@ module.exports = NodeHelper.create({
     // Subclass socketNotificationReceived received.
     socketNotificationReceived: function(notification, apiKey) {
         if (notification === 'TRAFFIC_CAM_GET') {
-            //this.apiKey = options["apiKey"];
             this.apiKey = apiKey;
-            //this.camRegion = options["camRegion"];
             this.grabCams();
         } 
     },
