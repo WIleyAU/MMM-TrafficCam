@@ -76,6 +76,7 @@ Module.register('MMM-TrafficCam', {
     getDom: function () {
         var wrapper = document.createElement("div");
         var header = document.createElement("header");
+        var header2 = document.createElement("header");
         var name2 = document.createElement("span");
         var name = document.createElement("span");
         var table = document.createElement("table");
@@ -102,9 +103,10 @@ Module.register('MMM-TrafficCam', {
 
         
         header.appendChild(name);
-        header.appendChild(name2);
+        header2.appendChild(name2);
         wrapper.appendChild(image);
         wrapper.appendChild(header);
+        wrapper.appendChild(header2);
 
         return wrapper;
     }
