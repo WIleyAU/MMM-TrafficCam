@@ -12,7 +12,7 @@ Module.register('MMM-TrafficCam', {
         animationSpeed: 0,
         header: '',
         imageSize: 400,
-        camID: "",
+        camCust: [],
         camRegion: "SYD_MET",
         apiKey: "",
         loadingText: "Loading..."
