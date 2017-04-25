@@ -96,10 +96,6 @@ Module.register('MMM-TrafficCam', {
 
 
         table.innerHTML = '<tr>' +
-                        '<td class="title" style="text-align:Right;">' + this.translate("CAM LOCATION") + ':&nbsp;</td>' +
-                        '<td class="value" style="text-align:left;">' + camTitle + '</td>' +
-                        '</tr>' +
-                        '<tr>' +
                         '<td class="title" style="text-align:Right;">' + this.translate("CAM DIRECTION") + ':&nbsp;</td>' +
                         '<td class="value" style="text-align:left;">' + camDir + '</td>' +
                         '</tr>' +
@@ -133,9 +129,10 @@ Module.register('MMM-TrafficCam', {
         wrapper.appendChild(header2);
         */
 
-        header.appendChild(table);
+        header.appendChild(name);
         wrapper.appendChild(image);
         wrapper.appendChild(header);
+        wrapper.appendChild(table);
 
         return wrapper;
     }
