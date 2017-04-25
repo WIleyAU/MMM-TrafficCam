@@ -38,8 +38,12 @@ Module.register('MMM-TrafficCam', {
         var tempListf = [];
         tempListf = this.tempList;
         for (var i = 0, len = tempListf.length; i < len; i++) {
+            if (this.camRegion === "ALL") {
+                this.imageList.push(tempListf[i])
+            } else {
             if (tempListf[i]["properties"]["region"] == this.config.camRegion) {
                 this.imageList.push(tempListf[i])
+            };
             };
         };
         this.updateDom(this.config.animationSpeed);
