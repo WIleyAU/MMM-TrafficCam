@@ -39,7 +39,14 @@ Module.register('MMM-TrafficCam', {
     filterImages: function () {
         var tempListf = [];
         tempListf = this.tempList;
-        this.imageList = tempListf;
+        //this.imageList = tempListf;
+        for (var i = 0, len = tempListf.length; i < len; i++) {
+            if (tempListf[i]["properties"]["region"] == this.config.camRegion) {
+                this.imageList.push(tempListf[i])
+            };
+        };
+
+
 //        tempListf.features.forEach(function (results) {
 //            console.log("MMM-TrafficCam forEach start check...");
 //            console.log("MMM-TrafficCam results.properties.region: " + results.properties.region);
