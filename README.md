@@ -19,7 +19,7 @@ The entry in `config.js` can include the following options:
 |`camCust`|Array of individual camera IDs to display INSTEAD of the default regional group.<br>A value entered here will OVERWRITE `camRegion`<br><br>**Type:** `Array`<br>**Default value:** []<br>This value is OPTIONAL|
 |`imageSize`|Display size of the image<br><br>**Type:** `Integer`<br>**Default value:** 400<br>This value is OPTIONAL|
 |`animationSpeed`|Fade in and fade out speed of the individual camera images<br><br>**Type:** `Integer`<br>**Default value:** 1000<br>This value is OPTIONAL|
-|`updateInterval`|How often the the images are updated.<br><br>**Type:** `Integer`<br>**Default value:** 300000<br>This value is OPTIONAL|
+|`updateInterval`|How often the the images are updated.<br><br>**Type:** `Integer`<br>**Default value:** 10000<br>This value is OPTIONAL|
 
 
 Here is an example of an entry in `config.js`
