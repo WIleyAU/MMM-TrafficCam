@@ -40,18 +40,19 @@ Module.register('MMM-TrafficCam', {
         this.sendSocketNotification("TRAFFIC_CAM_GET",options);
     },
 
-    filterImages: function() {
-        this.tempList.forEach(function (results) {
+    filterImages: function (tempList) {
+        var tempListf = this.tempList;
+        tempListf.features.forEach(function (results) {
             console.log("MMM-TrafficCam forEach start check...");
             console.log("MMM-TrafficCam results.properties.region: " + results.properties.region);
-            if (results.properties.region == this.config.camRegion) {
-                console.log("MMM-TrafficCam this.config.camRegion: " + this.config.camRegion);
+//            if (results.properties.region == this.config.camRegion) {
+//                console.log("MMM-TrafficCam this.config.camRegion: " + this.config.camRegion);
                 this.imageList.push(results);
                 console.log("MMM-TrafficCam images length working: " + this.imageList.length);
-           };
+//           };
         });
-        //this.updateDom(1000);
-        //this.scheduleUpdate();
+        this.updateDom(1000);
+        this.scheduleUpdate();
         this.url = "http://www.rms.nsw.gov.au/trafficreports/cameras/camera_images/anzacbr.jpg";
     },
 
@@ -61,8 +62,8 @@ Module.register('MMM-TrafficCam', {
             console.log("MMM-TrafficCam Payload Length: " + payload.length);
             this.tempList = payload;
             this.filterImages();
-            this.updateDom(1000);
-            this.scheduleUpdate();
+//            this.updateDom(1000);
+//            this.scheduleUpdate();
         }
     },
     
