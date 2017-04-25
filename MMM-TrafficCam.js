@@ -27,11 +27,12 @@ Module.register('MMM-TrafficCam', {
         this.imageList = [];
         this.tempList = [];
         this.activeItem = 0;
+        this.loaded = false;
         this.grabCams();
     },
 
 
-     
+
     grabCams: function () {
         this.sendSocketNotification("TRAFFIC_CAM_GET", this.config.apiKey);
     },
@@ -48,13 +49,17 @@ Module.register('MMM-TrafficCam', {
         this.scheduleUpdate();
     },
 
-    socketNotificationReceived: function(notification, payload) {
+    socketNotificationReceived: function (notification, payload) {
         if (notification === "TRAFFIC_CAM_LIST") {
             this.tempList = payload;
-            this.filterImages();
+            if (!this.loaded) {
+                this.updateDom(1000);
+                this.filterImages();
+            }
+            this.loaded = true;
         }
     },
-    
+
 
 
 
@@ -64,7 +69,7 @@ Module.register('MMM-TrafficCam', {
             console.log('update')
         }, this.config.updateInterval);
     },
-    
+
 
 
     getStyles: function () {
@@ -79,6 +84,12 @@ Module.register('MMM-TrafficCam', {
         var name = document.createElement("span");
         var imgTitle = "";
         var imgDir = "";
+
+        if (!this.loaded) {
+            wrapper.innerHTML = "Loading...";
+            return wrapper;
+        }
+
 
         if (this.activeItem >= this.imageList.length) {
             this.activeItem = 0;
@@ -98,11 +109,11 @@ Module.register('MMM-TrafficCam', {
         //name.innerHTML = "" + this.url;
         name.innerHTML = "" + imgTitle + "    View: " + imgDir;
 
-        
+
         header.appendChild(name);
         wrapper.appendChild(header);
         wrapper.appendChild(image);
-   
+
         return wrapper;
     }
 });
