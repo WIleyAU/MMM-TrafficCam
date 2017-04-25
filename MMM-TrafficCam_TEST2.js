@@ -37,8 +37,8 @@ Module.register('MMM-TrafficCam', {
             "apiKey": this.config.apiKey,
             "camRegion": this.config.camRegion
         };
-        // this.sendSocketNotification("TRAFFIC_CAM_GET",options);
-        this.sendSocketNotification("TRAFFIC_CAM_GET");
+        //this.sendSocketNotification("TRAFFIC_CAM_GET",options);
+        this.sendSocketNotification("TRAFFIC_CAM_GET", this.config.apiKey);
     },
 
     filterImages: function () {
