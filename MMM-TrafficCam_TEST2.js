@@ -76,14 +76,9 @@ Module.register('MMM-TrafficCam', {
     getDom: function () {
         var wrapper = document.createElement("div");
         var header = document.createElement("header");
-        var header2 = document.createElement("header");
-        var name2 = document.createElement("span");
         var name = document.createElement("span");
-        var table = document.createElement("table");
         var imgTitle = "";
         var imgDir = "";
-        var imgReg = "";
-        var imgDesc = "";
 
         if (this.activeItem >= this.imageList.length) {
             this.activeItem = 0;
@@ -91,23 +86,6 @@ Module.register('MMM-TrafficCam', {
         this.url = this.imageList[this.activeItem]["properties"]["href"];
         imgTitle = this.imageList[this.activeItem]["properties"]["title"];
         imgDir = this.imageList[this.activeItem]["properties"]["direction"];
-        imgReg = this.imageList[this.activeItem]["properties"]["region"];
-        imgDesc = this.imageList[this.activeItem]["properties"]["view"];
-
-
-        table.innerHTML = '<tr>' +
-                        '<td class="title" style="text-align:Right;"> CAM DIRECTION:&nbsp;</td>' +
-                        '<td class="value" style="text-align:left;">' + camDir + '</td>' +
-                        '</tr>' +
-                        '<tr>' +
-                        '<td class="title" style="text-align:Right;">CAM REGION:&nbsp;</td>' +
-                        '<td class="value" style="text-align:left;">' + camReg + '</td>' +
-                        '</tr>' +
-                        '<tr>' +
-                        '<td class="title" style="text-align:Right;">CAM DESCRIPTION:&nbsp;</td>' +
-                        '<td class="value" style="text-align:left;">' + camDesc + '</td>' +
-                        '</tr>';
-
 
         this.activeItem++;
 
@@ -118,24 +96,13 @@ Module.register('MMM-TrafficCam', {
         image.height = this.config.imageSize.toString();
 
         //name.innerHTML = "" + this.url;
-        name.innerHTML = "" + imgTitle;
-        name2.innerHTML = "View: " + imgDir;
+        name.innerHTML = "" + imgTitle + "    View: " + imgDir;
 
-        /*
-        header.appendChild(name);
-        header2.appendChild(name2);
-        wrapper.appendChild(image);
-        wrapper.appendChild(header);
-        wrapper.appendChild(header2);
-        */
-        /*
+        
         header.appendChild(name);
         wrapper.appendChild(image);
         wrapper.appendChild(header);
-        wrapper.appendChild(table);
-        */
-
-        //return wrapper;
-        return table;
+   
+        return wrapper;
     }
 });
