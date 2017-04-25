@@ -1,0 +1,25 @@
+{
+  "name": "Magic-Mirror-Module-TrafficCam",
+  "version": "1.0.0",
+  "description": "Grab urls from your photostream",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/WIleyAU/MMM-TrafficCam"
+  },
+  "keywords": [
+    "magic mirror",
+    "smart mirror",
+    "traffic",
+    "module"
+  ],
+  "author": "Scott Kemble",
+  "contributors": "https://github.com/WIleyAU/MMM-TrafficCam/graphs/contributors",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/WIleyAU/MMM-TrafficCam/issues"
+  },
+  "homepage": "https://github.com/WIleyAU/MMM-TrafficCam#readme",
+  "dependencies": {
+    "request": "latest"
+    }
+}
