@@ -25,51 +25,38 @@ Module.register('MMM-TrafficCam', {
         self = this;
         this.url = '';
         this.imageList = [];
+        this.tempList = [];
         this.activeItem = 0;
-  
         this.grabCams();
     },
 
+
+     
     grabCams: function () {
+        this.sendSocketNotification("TRAFFIC_CAM_GET", this.config.apiKey);
+    },
 
-        var imageUrls = {
-            'natColor': 'http://www.rms.nsw.gov.au/trafficreports/cameras/camera_images/anzacbr.jpg',
-            'geoColor': 'http://rammb.cira.colostate.edu/ramsdis/online/images/latest/himawari-8/full_disk_ahi_true_color.jpg',
-            'airMass': 'http://rammb.cira.colostate.edu/ramsdis/online/images/latest/himawari-8/full_disk_ahi_rgb_airmass.jpg',
-            'fullBand': 'http://rammb.cira.colostate.edu/ramsdis/online/images/latest/himawari-8/himawari-8_band_03_sector_02.gif',
-            'europeDiscNat': 'http://oiswww.eumetsat.org/IPPS/html/latestImages/EUMETSAT_MSG_RGBNatColour_LowResolution.jpg',
-            'europeDiscSnow': 'http://oiswww.eumetsat.org/IPPS/html/latestImages/EUMETSAT_MSG_RGBSolarDay_CentralEurope.jpg',
-            'centralAmericaDiscNat': 'http://goes.gsfc.nasa.gov/goescolor/goeseast/overview2/color_med/latestfull.jpg'
-
+    filterImages: function () {
+        var tempListf = [];
+        tempListf = this.tempList;
+        for (var i = 0, len = tempListf.length; i < len; i++) {
+            if (tempListf[i]["properties"]["region"] == this.config.camRegion) {
+                this.imageList.push(tempListf[i])
+            };
         };
-        var hiResImageUrls = {
-            'natColor': 'http://www.rms.nsw.gov.au/trafficreports/cameras/camera_images/harbourbridge.jpg',
-            'geoColor': 'http://rammb.cira.colostate.edu/ramsdis/online/images/latest_hi_res/himawari-8/full_disk_ahi_true_color.jpg',
-            'airMass': 'http://rammb.cira.colostate.edu/ramsdis/online/images/latest_hi_res/himawari-8/full_disk_ahi_rgb_airmass.jpg',
-            'fullBand': 'http://rammb.cira.colostate.edu/ramsdis/online/images/latest/himawari-8/himawari-8_band_03_sector_02.gif',
-            'europeDiscNat': 'http://oiswww.eumetsat.org/IPPS/html/latestImages/EUMETSAT_MSG_RGBNatColour_LowResolution.jpg',
-            'europePartSnow': 'http://oiswww.eumetsat.org/IPPS/html/latestImages/EUMETSAT_MSG_RGBSolarDay_CentralEurope.jpg',
-            'centralAmericaDiscNat': 'http://goes.gsfc.nasa.gov/goescolor/goeseast/overview2/color_lrg/latestfull.jpg'
-        };
-        var loResImageUrls = {
-            'natColor': 'http://www.rms.nsw.gov.au/trafficreports/cameras/camera_images/yorkst_sydney.jpg',
-            'geoColor': 'http://rammb.cira.colostate.edu/ramsdis/online/images/latest_hi_res/himawari-8/full_disk_ahi_true_color.jpg',
-            'airMass': 'http://rammb.cira.colostate.edu/ramsdis/online/images/latest_hi_res/himawari-8/full_disk_ahi_rgb_airmass.jpg',
-            'fullBand': 'http://rammb.cira.colostate.edu/ramsdis/online/images/latest/himawari-8/himawari-8_band_03_sector_02.gif',
-            'europeDiscNat': 'http://oiswww.eumetsat.org/IPPS/html/latestImages/EUMETSAT_MSG_RGBNatColour_LowResolution.jpg',
-            'europePartSnow': 'http://oiswww.eumetsat.org/IPPS/html/latestImages/EUMETSAT_MSG_RGBSolarDay_CentralEurope.jpg',
-            'centralAmericaDiscNat': 'http://goes.gsfc.nasa.gov/goescolor/goeseast/overview2/color_lrg/latestfull.jpg'
-        };
-        var imageList = [];
-
-        imageList.push(imageUrls);
-        imageList.push(hiResImageUrls);
-        imageList.push(loResImageUrls);
-
-        //return imageList;
-        this.imageList = imageList;
+        this.updateDom(1000);
         this.scheduleUpdate();
     },
+
+    socketNotificationReceived: function(notification, payload) {
+        if (notification === "TRAFFIC_CAM_LIST") {
+            this.tempList = payload;
+            this.filterImages();
+        }
+    },
+    
+
+
 
     scheduleUpdate: function () {
         setInterval(function () {
@@ -77,7 +64,7 @@ Module.register('MMM-TrafficCam', {
             console.log('update')
         }, this.config.updateInterval);
     },
-
+    
 
 
     getStyles: function () {
@@ -88,33 +75,34 @@ Module.register('MMM-TrafficCam', {
 
     getDom: function () {
         var wrapper = document.createElement("div");
-        if (this.config.style == "europeDiscNat") {
-            wrapper.style.height = 0.98 * this.config.imageSize - 1 + "px";
-            wrapper.style.overflow = "hidden";
-        }
-
+        var header = document.createElement("header");
+        var name = document.createElement("span");
+        var imgTitle = "";
+        var imgDir = "";
 
         if (this.activeItem >= this.imageList.length) {
             this.activeItem = 0;
         }
-        this.url = this.imageList[this.activeItem][this.config.style];
+        this.url = this.imageList[this.activeItem]["properties"]["href"];
+        imgTitle = this.imageList[this.activeItem]["properties"]["title"];
+        imgDir = this.imageList[this.activeItem]["properties"]["direction"];
+
         this.activeItem++;
 
         var image = document.createElement("img");
-        if (this.config.ownImagePath != '') {
-            image.src = this.url;
-        } else if (this.config.style == "centralAmericaDiscNat") {
-            image.src = this.url + '?' + new Date().getTime();
-            image.className = 'MMM-Globe-image-centralAmericaDiscNat';
-        } else {
-            image.src = this.url + '?' + new Date().getTime();
-            image.className = 'MMM-Globe-image';
-        }
-
+        image.src = this.url;
+        image.className = 'MMM-TrafficCam';
         image.width = this.config.imageSize.toString();
         image.height = this.config.imageSize.toString();
 
+        //name.innerHTML = "" + this.url;
+        name.innerHTML = "" + imgTitle + "    View: " + imgDir;
+
+        
+        header.appendChild(name);
+        wrapper.appendChild(header);
         wrapper.appendChild(image);
+   
         return wrapper;
     }
 });
