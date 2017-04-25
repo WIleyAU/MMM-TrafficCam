@@ -52,7 +52,7 @@ Module.register('MMM-TrafficCam', {
         });
         //this.updateDom(1000);
         //this.scheduleUpdate();
-//        this.url = "http://www.rms.nsw.gov.au/trafficreports/cameras/camera_images/anzacbr.jpg";
+        this.url = "http://www.rms.nsw.gov.au/trafficreports/cameras/camera_images/anzacbr.jpg";
     },
 
     socketNotificationReceived: function(notification, payload) {
