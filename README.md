@@ -1,10 +1,13 @@
 MMM-TrafficCam
 ===================
-This is a module for the [MagicMirror](https://github.com/MichMich/MagicMirror). It displays live images from traffic cameras throughout NSW Australia. It can also display a custom subset of traffic camera images (yet to be implemented).
+This is a module for the [MagicMirror](https://github.com/MichMich/MagicMirror). It displays live images from traffic cameras throughout NSW Australia. It can also display a custom subset of traffic camera images.
 
 ## Installation
 Navigate into your MagicMirror's `modules` folder and execute `git clone https://github.com/WIleyAU/MMM-TrafficCam.git`.
 Install the module with 'npm install'.
+
+## Dependencies
+- [Request](https://github.com/request/request) which will be installed as part of `npm install`
 
 ## Config
 The entry in `config.js` can include the following options:
